@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Immersive Experience Enhancements */
+html,
+body {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  user-select: none;
+  /* Global text selection disable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-8 py-4 bg-gold text-charcoal border border-transparent rounded-full font-sans font-bold transition-all duration-500 ease-luxury hover:bg-charcoal hover:text-gold hover:border-gold/30 hover:shadow-xl active:scale-95 flex justify-center items-center gap-3;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 border border-charcoal/20 text-charcoal rounded-full font-sans font-bold transition-all duration-500 ease-luxury hover:bg-charcoal hover:text-white hover:border-transparent hover:shadow-lg active:scale-95 flex justify-center items-center gap-3;
+  }
+
+  .nav-link {
+    @apply font-sans text-charcoal/70 hover:text-charcoal transition-all duration-300 hover:-translate-y-[1px] relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full font-bold uppercase tracking-wider text-sm;
+  }
+
+  .section-title {
+    @apply font-serif text-4xl md:text-6xl text-charcoal leading-tight;
+  }
+
+  .card-stack {
+    @apply sticky top-32 w-full max-w-2xl mx-auto rounded-3xl p-8 shadow-2xl;
+  }
+
+  .glass-card {
+    @apply bg-cream/80 backdrop-blur-lg border border-white/20 rounded-2xl;
+  }
+}
+
+/* Custom animations for noise and noise filter */
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee:hover, .animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}

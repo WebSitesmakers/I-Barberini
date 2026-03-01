@@ -1,0 +1,1450 @@
+import React, { useEffect, useRef, useState, useLayoutEffect, useMemo } from 'react';
+import Lenis from 'lenis';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+    Menu, X, Scissors, Heart, MapPin,
+    Sparkles, Clock, Phone, Instagram,
+    Facebook, ArrowRight, Camera, Star, Calendar, ChevronDown, Mail
+} from 'lucide-react';
+import logo from './assets/logo.png';
+import heroImg from './assets/HERO.jpg';
+
+// Import Ambienti Images
+import amb1 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-06995.jpg';
+import amb2 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.jpg';
+import amb3 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07024.jpg';
+import amb4 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0600.JPG';
+
+// Import Beauty Images
+import beautyHero from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/centro-benessere-i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45.jpg';
+import beautyBed from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45-lettino-massaggi.jpg';
+import beautySauna from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/i-barberiniBeautySauna1.jpg';
+import beautyTreat1 from './assets/BEAUTY CENTER/TRATTAMENTI CORPO/IBARBERINIBEAUTY(1).jpg';
+import beautyTreat2 from './assets/BEAUTY CENTER/TRATTAMENTI CORPO/IBARBERINIBEAUTY3.jpg';
+
+// Import Specific Treatment Images
+import treatDermaplaning from './assets/BEAUTY CENTER/DERMAPLANING/I BARBERINI DERMAPLANING.jpg';
+import treatLaminazione from './assets/BEAUTY CENTER/LAMINAZIONE CIGLIA/I BARBERINI Laminazione.jpg';
+import treatLaser from './assets/BEAUTY CENTER/LASER  DIODO/epilazione-laser.jpg';
+import treatMakeUp from './assets/BEAUTY CENTER/MAKE-UP/VISO I BARBERINI 7.JPG.jpg';
+import treatMicroblading from './assets/BEAUTY CENTER/MICROBLADING/MICROBLADING I BARBERINI 1.JPG..jpeg';
+import treatNails from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 10.jpg';
+import treatPermanentMakeup from './assets/BEAUTY CENTER/PERMANENT MAKE UP/permanent-makeup.jpg';
+import treatPressoterapia from './assets/BEAUTY CENTER/PRESSOTERAPIA/pressoterapia1.jpg';
+import treatRadiofrequenza from './assets/BEAUTY CENTER/TRATTAMENTO VISO/Radiofrequenza-viso.jpg';
+import treatXtremeLashes from './assets/BEAUTY CENTER/XTREME LASHES/x-treme-lashes02.jpg';
+
+// Import Nails Section Images
+import nailsImg1 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 14.jpg';
+import nailsImg2 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 15.jpg';
+import nailsImg3 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 18.jpg';
+
+// Chi Siamo Image
+import doriano1985 from './assets/Collezioni/Anni 90/Doriano 1985.jpg';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// --- Utilities & Components ---
+
+const ScrollBackground = () => {
+    const bgRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.to(bgRef.current, {
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1,
+                },
+                backgroundPosition: "0% 100%",
+                ease: "none"
+            });
+        }, bgRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <div
+            ref={bgRef}
+            className="fixed inset-0 z-[-1] pointer-events-none opacity-40"
+            style={{
+                background: "radial-gradient(circle at 10% 20%, rgba(199, 161, 74, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(90, 62, 54, 0.05) 0%, transparent 40%)",
+                backgroundSize: "100% 200%"
+            }}
+        />
+    );
+};
+
+// --- Dynamic Image Imports for Collections ---
+// Vite import.meta.glob gives us a record of all matching files
+const importAllImages = (globResult) => {
+    return Object.values(globResult).map((module) => module.default);
+};
+
+const images90s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 90/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
+const images00s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2000/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
+const images10s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2010/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
+const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
+const imagesSpose = importAllImages(import.meta.glob('./assets/Collezioni/LE SPOSE/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+
+
+const COLLECTIONS = [
+    {
+        id: 'anni-90',
+        title: "Anni '90",
+        desc: "L'origine della nostra storia a Monteverde.",
+        image: images90s[0] || "https://images.unsplash.com/photo-1522336572468-97b06e8ef143?q=80&w=1000",
+        images: images90s
+    },
+    {
+        id: 'anni-2000',
+        title: "Anni 2000",
+        desc: "Sperimentazione e nuovi volumi.",
+        image: images00s[0] || "https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=1000",
+        images: images00s
+    },
+    {
+        id: 'anni-2010',
+        title: "Anni 2010",
+        desc: "Il minimalismo incontra la tradizione.",
+        image: images10s[0] || "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1000",
+        images: images10s
+    },
+    {
+        id: 'anni-2020',
+        title: "Anni 2020",
+        desc: "Tecnica contemporanea e sostenibilità.",
+        image: images20s[0] || "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1000",
+        images: images20s
+    },
+    {
+        id: 'spose',
+        title: "Spose",
+        desc: "Il giorno più bello, affidato alle nostre mani.",
+        image: imagesSpose[0] || "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000",
+        images: imagesSpose,
+        special: true
+    },
+];
+
+// --- Components ---
+
+const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    return (
+        <>
+            <nav className={`fixed top-6 left-0 right-0 mx-auto z-[100] w-[95%] max-w-5xl transition-all duration-700 ${isScrolled ? 'top-4' : 'top-8'
+                }`}>
+                <div className={`relative w-full rounded-full transition-all duration-500 border px-8 py-3 flex justify-between items-center ${isScrolled
+                    ? 'bg-white/10 backdrop-blur-2xl py-3 border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]'
+                    : 'bg-cream/40 backdrop-blur-md py-5 border-charcoal/5 shadow-2xl'
+                    }`}>
+                    <Link to="/" className="hover:scale-105 transition-transform duration-300 flex items-center">
+                        <img src={logo} alt="I Barberini" className="h-12 w-auto object-contain" />
+                    </Link>
+
+                    <div className="hidden md:flex items-center gap-10">
+                        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'text-charcoal after:w-full' : ''}`}>Home</Link>
+                        <Link to="/collezioni" className={`nav-link ${location.pathname.startsWith('/collezioni') ? 'text-charcoal after:w-full' : ''}`}>Collezioni</Link>
+                        <Link to="/sedi" className={`nav-link ${location.pathname === '/sedi' ? 'text-charcoal after:w-full' : ''}`}>Sedi</Link>
+                        <Link to="/beauty-center" className={`nav-link ${location.pathname === '/beauty-center' ? 'text-charcoal after:w-full' : ''}`}>Beauty Center</Link>
+                        <Link to="/sedi" className="btn-primary py-2 px-6 text-xs tracking-[0.2em] font-bold text-center">PRENOTA</Link>
+                    </div>
+
+                    <button className="md:hidden text-charcoal p-2 hover:bg-charcoal/5 rounded-full transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        {isMenuOpen ? <X /> : <Menu />}
+                    </button>
+                </div>
+            </nav>
+
+            {/* Mobile Menu */}
+            <div className={`fixed inset-0 bg-cream/95 backdrop-blur-2xl z-[110] flex flex-col items-center justify-center gap-8 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isMenuOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-10'
+                }`}>
+                <Link to="/" className="font-script text-5xl mb-8" onClick={() => setIsMenuOpen(false)}>I Barberini</Link>
+                <Link to="/" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname === '/' ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Home</Link>
+                <Link to="/collezioni" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname.startsWith('/collezioni') ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Collezioni</Link>
+                <Link to="/sedi" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname === '/sedi' ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Sedi</Link>
+                <Link to="/beauty-center" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname === '/beauty-center' ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Beauty Center</Link>
+                <Link to="/sedi" className="btn-primary mt-8 scale-125 text-center" onClick={() => setIsMenuOpen(false)}>PRENOTA ORA</Link>
+                <button className="absolute top-10 right-10 p-3 hover:bg-charcoal/5 rounded-full" onClick={() => setIsMenuOpen(false)}><X size={32} /></button>
+            </div>
+        </>
+    );
+};
+
+const Hero = () => {
+    const heroRef = useRef(null);
+    const bgRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".hero-content > *", {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+
+            gsap.to(bgRef.current, {
+                scrollTrigger: {
+                    trigger: heroRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: 100,
+                scale: 1.1,
+                ease: "none"
+            });
+        }, heroRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={heroRef} className="relative h-[100dvh] flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 z-0">
+                <img
+                    ref={bgRef}
+                    src={heroImg}
+                    alt="I Barberini Salon"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/20 to-cream" />
+            </div>
+
+            <div className="container mx-auto px-6 relative z-10 text-center hero-content">
+                <h1 className="font-script text-7xl md:text-[10rem] text-white mb-6 tracking-normal drop-shadow-2xl">
+                    I Barberini
+                </h1>
+                <p className="font-sans text-xl md:text-2xl text-white/95 mb-10 max-w-2xl mx-auto italic drop-shadow-lg">
+                    L'arte dell'immagine a Roma, nel cuore di Monteverde, dal 1990.
+                </p>
+                <div className="flex flex-col md:flex-row gap-4 justify-center">
+                    <Link to="/collezioni" className="btn-primary">SCOPRI LE COLLEZIONI</Link>
+                    <button className="btn-secondary bg-white/10 backdrop-blur-sm text-white border-white/30">PRENOTA ORA</button>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const ValueSection = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".glass-card", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-24 bg-cream relative">
+            <div className="container mx-auto px-6">
+                <div className="grid md:grid-cols-3 gap-12">
+                    <div className="flex flex-col gap-4 p-8 glass-card">
+                        <Clock className="text-gold" size={40} />
+                        <h3 className="font-serif text-2xl uppercase">Esperienza</h3>
+                        <p className="text-charcoal/70 leading-relaxed font-sans">
+                            Oltre trent'anni di storia dedicati alla bellezza. Dal 1990 siamo il punto di riferimento per chi cerca stile e professionalità a Roma.
+                        </p>
+                    </div>
+                    <div className="flex flex-col gap-4 p-8 glass-card">
+                        <Scissors className="text-gold" size={40} />
+                        <h3 className="font-serif text-2xl uppercase">Talento</h3>
+                        <p className="text-charcoal/70 leading-relaxed font-sans">
+                            I nostri parrucchieri sono maestri nell'ascolto e nella progettazione di un look che valorizzi la tua personalità in ogni dettaglio.
+                        </p>
+                    </div>
+                    <div className="flex flex-col gap-4 p-8 glass-card">
+                        <Heart className="text-gold" size={40} />
+                        <h3 className="font-serif text-2xl uppercase">Spose</h3>
+                        <p className="text-charcoal/70 leading-relaxed font-sans">
+                            Uno dei nostri più grandi orgogli. Accompagniamo le spose nel giorno più importante con creazioni uniche e sognanti.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const Philosophy = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".reveal-text span", {
+                scrollTrigger: {
+                    trigger: ".reveal-text",
+                    start: "top 80%",
+                },
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                stagger: 0.05,
+                ease: "power2.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    const text = "La maggior parte dei saloni punta sulla quantità. Noi puntiamo sulla qualità, relazione e continuità.";
+
+    return (
+        <section ref={sectionRef} className="py-32 bg-charcoal text-white overflow-hidden">
+            <div className="container mx-auto px-6 text-center">
+                <p className="font-sans uppercase tracking-widest text-gold mb-8">La nostra filosofia</p>
+                <h2 className="reveal-text font-serif text-4xl md:text-7xl leading-tight max-w-5xl mx-auto">
+                    {text.split(" ").map((word, i) => (
+                        <span key={i} className="inline-block mr-4">
+                            {word === "qualità," || word === "relazione" || word === "continuità." ? (
+                                <em className="text-gold not-italic">{word}</em>
+                            ) : word}
+                        </span>
+                    ))}
+                </h2>
+            </div>
+        </section>
+    );
+};
+
+const Method = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".method-item", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 70%",
+                },
+                x: -30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                ease: "power2.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-24 bg-cream">
+            <div className="container mx-auto px-6">
+                <h2 className="section-title text-center mb-16">Il Nostro Metodo</h2>
+                <div className="space-y-12 max-w-4xl mx-auto">
+                    {[
+                        { step: "01", title: "Ascolto", desc: "Ogni servizio inizia con una conversazione. Capire i tuoi desideri è la chiave di un risultato perfetto." },
+                        { step: "02", title: "Progettazione", desc: "Traduciamo le tue idee in un progetto stilistico su misura, considerando lineamenti, stile di vita e salute del capello." },
+                        { step: "03", title: "Cura Continua", desc: "Non finisce in salone. Ti forniamo i consigli e i prodotti giusti per mantenere il tuo look radioso ogni giorno." }
+                    ].map((item, idx) => (
+                        <div key={idx} className="method-item flex gap-8 items-start border-l-2 border-gold/30 pl-8 relative">
+                            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gold" />
+                            <div>
+                                <span className="text-gold font-sans font-bold text-sm tracking-tighter uppercase mb-2 block">{item.step}</span>
+                                <h3 className="font-serif text-3xl mb-4 uppercase">{item.title}</h3>
+                                <p className="text-charcoal/70 text-lg leading-relaxed">{item.desc}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const Lightbox = ({ images, onClose }) => {
+    const [current, setCurrent] = useState(0);
+
+    return (
+        <div className="fixed inset-0 z-[100] bg-charcoal flex flex-col items-center justify-center p-6">
+            <button onClick={onClose} className="absolute top-8 right-8 text-white hover:text-gold transition-colors">
+                <X size={40} />
+            </button>
+            <div className="relative max-w-4xl w-full aspect-square md:aspect-video flex items-center justify-center">
+                <img
+                    src={images[current]}
+                    alt="Gallery"
+                    className="max-w-full max-h-full object-contain shadow-2xl animate-fade-in"
+                />
+                <button
+                    className="absolute left-4 p-4 text-white/50 hover:text-white"
+                    onClick={() => setCurrent((current - 1 + images.length) % images.length)}
+                >
+                    <ArrowRight className="rotate-180" size={32} />
+                </button>
+                <button
+                    className="absolute right-4 p-4 text-white/50 hover:text-white"
+                    onClick={() => setCurrent((current + 1) % images.length)}
+                >
+                    <ArrowRight size={32} />
+                </button>
+            </div>
+            <div className="mt-8 flex gap-4 text-white/50 font-sans">
+                {current + 1} / {images.length}
+            </div>
+        </div>
+    );
+};
+
+const AmbientiSection = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".ambienti-img", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                y: 80,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+            gsap.from(".ambienti-text", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-32 bg-white relative overflow-hidden">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col md:flex-row gap-16 items-center mb-20 ambienti-text">
+                    <div className="md:w-1/2">
+                        <h2 className="section-title mb-6">Un Ambiente<br /><span className="italic text-charcoal/60">Esclusivo</span></h2>
+                    </div>
+                    <div className="md:w-1/2">
+                        <p className="text-xl text-charcoal/80 font-sans leading-relaxed">
+                            Abbiamo curato ogni dettaglio dei nostri saloni per offrirti un'esperienza di puro relax e lusso sartoriale. Entra nel mondo de I Barberini.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2 aspect-[16/9] lg:aspect-auto h-64 lg:h-[32rem] rounded-[2rem] overflow-hidden ambienti-img">
+                        <img src={amb3} alt="Interni del Salone" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="aspect-square lg:aspect-auto lg:h-[32rem] rounded-[2rem] overflow-hidden ambienti-img">
+                        <img src={amb2} alt="Dettagli Salone" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="aspect-square lg:aspect-auto lg:h-[24rem] rounded-[2rem] overflow-hidden ambienti-img">
+                        <img src={amb1} alt="Stazione Taglio" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="lg:col-span-2 aspect-[16/9] lg:aspect-auto h-64 lg:h-[24rem] rounded-[2rem] overflow-hidden ambienti-img">
+                        <img src={amb4} alt="Design del Salone" className="w-full h-full object-cover" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const ChiSiamoSection = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".chi-siamo-text", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+            gsap.from(".chi-siamo-img", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                x: 50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-32 bg-cream overflow-hidden border-t border-charcoal/5">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col lg:flex-row gap-16 items-center">
+                    <div className="lg:w-1/2 chi-siamo-text">
+                        <span className="text-gold font-sans tracking-[0.2em] uppercase mb-4 block text-sm">Dal 1987</span>
+                        <h2 className="section-title mb-8">La Nostra Storia</h2>
+                        <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-6 italic">Consulenti di Bellezza da oltre 39 anni</h3>
+                        <div className="space-y-6 text-charcoal/80 font-sans leading-relaxed text-lg">
+                            <p>
+                                Doriano e Nadia dal 1987 giovanissimi e carichi di energia, incominciammo a diffondere le nostre idee, il nostro modo di concepire la cura e la bellezza.
+                            </p>
+                            <p>
+                                Con l'aiuto di Angelo e Sabrina e uno staff di circa 25 collaboratori, in pochi anni apriamo a Roma i nostri saloni di bellezza, costantemente aggiornati, attenti alle ultime tendenze moda e ai prodotti innovativi.
+                            </p>
+                            <p>
+                                Offriamo ai nostri clienti il meglio per un <span className="font-bold text-charcoal">Total Look</span> all'avanguardia. Nei nostri saloni offriamo un servizio completo per la cura dei capelli e del corpo: parrucchieri, barbieri, estetiste, onicotecniche, make-up artist, solarium e tutto ciò che riguarda la cura della persona.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="lg:w-1/2 w-full aspect-[4/5] object-contain md:h-[700px] rounded-[2rem] overflow-hidden chi-siamo-img relative shadow-2xl bg-cream">
+                        <img 
+                            src={doriano1985} 
+                            alt="Doriano 1985 - La Storia de I Barberini" 
+                            className="w-full h-full object-cover grayscale sepia-[0.3]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent mix-blend-multiply"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const BrandsSection = () => {
+    const brands = [
+        "Schwarzkopf", "Bioline", "AlfaParf", "Parlux", 
+        "Scellac", "Morgan Taylor", "Gelish", 
+        "Keratin Complex", "Xtreme Lashes", "Biotek", "Phibrows"
+    ];
+
+    // Split brands for two rows
+    const topBrands = brands.slice(0, 6);
+    const bottomBrands = brands.slice(6);
+
+    const sectionRef = useRef(null);
+
+    return (
+        <section ref={sectionRef} className="py-32 bg-charcoal text-white relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0">
+                <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2000" className="w-full h-full object-cover grayscale opacity-10" alt="Background Texture" />
+            </div>
+            <div className="container mx-auto px-6 text-center relative z-10 mb-16">
+                <span className="text-gold font-sans tracking-[0.3em] uppercase mb-4 block text-sm">Partner d'Eccellenza</span>
+                <h2 className="font-serif text-5xl md:text-6xl relative">I Nostri Brand</h2>
+            </div>
+            
+            <div className="w-full relative z-20 flex flex-col gap-8 md:gap-12 rotate-[-2deg] scale-105">
+                {/* Top Row Marquee */}
+                <div className="flex overflow-hidden group">
+                    <div className="animate-marquee flex gap-8 md:gap-12 px-4">
+                        {[...topBrands, ...topBrands, ...topBrands].map((brand, idx) => (
+                            <div key={`top-${idx}`} className="flex-shrink-0 px-8 py-4 md:px-12 md:py-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:bg-gold/20 hover:border-gold/50 transition-all duration-500 cursor-pointer shadow-2xl flex items-center justify-center">
+                                <span className="font-serif italic text-2xl md:text-4xl tracking-wider text-white/90 group-hover:text-white transition-colors">{brand}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Bottom Row Marquee (Reverse) */}
+                <div className="flex overflow-hidden group">
+                    <div className="animate-marquee-reverse flex gap-8 md:gap-12 px-4">
+                        {[...bottomBrands, ...bottomBrands, ...bottomBrands].map((brand, idx) => (
+                            <div key={`bot-${idx}`} className="flex-shrink-0 px-8 py-4 md:px-12 md:py-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-md hover:bg-gold/20 hover:border-gold/50 transition-all duration-500 cursor-pointer shadow-2xl flex items-center justify-center">
+                                <span className="font-serif italic text-2xl md:text-4xl tracking-wider text-white/90 group-hover:text-white transition-colors">{brand}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// --- Pages ---
+
+const HomePage = () => {
+    const mainRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".reveal-up", {
+                scrollTrigger: {
+                    trigger: ".reveal-up",
+                    start: "top 85%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        }, mainRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <main ref={mainRef}>
+            <Hero />
+            <ValueSection />
+            <ChiSiamoSection />
+            <Philosophy />
+            <section className="py-24 bg-cream reveal-up">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="section-title mb-8">Trent'anni di Stile</h2>
+                    <p className="text-charcoal/70 mb-12 max-w-xl mx-auto">
+                        Dagli anni 90 ad oggi, abbiamo attraversato ere e tendenze, mantenendo sempre fede alla nostra visione di eleganza.
+                    </p>
+                    <Link to="/collezioni" className="btn-secondary">VEDI TUTTE LE COLLEZIONI</Link>
+                </div>
+            </section>
+            <Method />
+            <BrandsSection />
+            <AmbientiSection />
+            <section className="py-48 bg-gold text-charcoal text-center overflow-hidden">
+                <div className="container mx-auto px-6 reveal-up">
+                    <h2 className="section-title mb-8">Vivi l'esperienza.</h2>
+                    <p className="mb-10 text-xl max-w-2xl mx-auto italic">
+                        Prenota oggi il tuo appuntamento e scopri il piacere di vedersi splendere.
+                    </p>
+                    <button className="btn-primary bg-charcoal text-white hover:bg-midnight shadow-2xl mx-auto">
+                        PRENOTA ORA <Calendar size={18} />
+                    </button>
+                </div>
+            </section>
+        </main>
+    );
+};
+
+const CollectionsPage = () => {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".collection-card", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <main ref={containerRef} className="pt-48 pb-24 bg-cream min-h-screen">
+            <div className="container mx-auto px-6">
+                <h1 className="section-title mb-16 animate-fade-in">Le Nostre Collezioni</h1>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {COLLECTIONS.map((col, i) => (
+                        <Link
+                            to={`/collezioni/${col.id}`}
+                            key={i}
+                            className={`relative rounded-[2rem] overflow-hidden group cursor-pointer block h-full w-full ${col.special ? 'md:col-span-2 lg:col-span-2 aspect-[21/9] md:aspect-[2/1] lg:aspect-auto' : 'aspect-square lg:aspect-[4/5]'
+                                }`}
+                        >
+                            <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/40 transition-colors duration-500 z-10" />
+                            <img
+                                src={col.image}
+                                alt={col.title}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 collection-image"
+                            />
+                            <div className="absolute inset-0 z-20 p-8 md:p-12 flex flex-col justify-end">
+                                <h3 className="font-serif text-2xl uppercase mb-2 text-white">{col.title}</h3>
+                                <div className="overflow-hidden">
+                                    <p className="text-white/80 font-sans transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">{col.desc}</p>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </main>
+    );
+};
+
+// Import specific Tuscolana image requested by user
+import ambTuscolana from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0591.JPG';
+
+const SEDI_DATA = [
+    {
+        id: "monteverde-hair",
+        title: "Monteverde Hair Studio",
+        image: amb2,
+        address: "Via F. Ozanam, 33 - 00152 Roma",
+        hours: "08:00 - 19:30 (Chiuso Domenica)",
+        phones: ["06 58200120", "06 58200558"],
+        whatsapp: "366 4353196",
+        email: "dorianocese@ibarberini.it",
+        instagram: "ibarberinihairstudio",
+        facebook: "I Barberini Hair & Beauty",
+        mapIframe: "https://maps.google.com/maps?q=I%20Barberini%20Hair%20Studio&ll=41.8761165,12.4478398&z=17&output=embed"
+    },
+    {
+        id: "monteverde-beauty",
+        title: "Monteverde Beauty Center",
+        image: beautyBed,
+        address: "Via F. Ozanam, 45 - 00152 Roma",
+        hours: "09:00 - 19:30 (Chiuso Domenica)",
+        phones: ["06 58233871"],
+        whatsapp: "333 8449866",
+        email: "Sabrinaangelilli@ibarberini.it",
+        instagram: "ibarberini_beautyerelax",
+        facebook: "I Barberini Beauty & Relax",
+        mapIframe: "https://maps.google.com/maps?q=I%20Barberini%20Beauty%20%26%20Relax&ll=41.8763005,12.4481053&z=17&output=embed"
+    },
+    {
+        id: "tuscolano-hair",
+        title: "Tuscolano Hair & Beauty",
+        image: ambTuscolana,
+        address: "V.le F. Camillo 52b - 00152 Roma",
+        hours: "08:30 - 19:00 (Chiuso Domenica e Lunedì)",
+        phones: ["06 7803519"],
+        whatsapp: null,
+        email: "nadiamancini@ibarberini.it",
+        instagram: "ibarberinidinadiamancini",
+        facebook: "hairstudio I Barberini di Nadia Mancini",
+        mapIframe: "https://maps.google.com/maps?q=I%20Barberini&ll=41.8755609,12.5246743&z=17&output=embed"
+    }
+];
+
+const LocationsPage = () => {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".location-block", {
+                scrollTrigger: {
+                    trigger: ".locations-container",
+                    start: "top 80%",
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.3,
+                ease: "power3.out"
+            });
+
+            gsap.from(".header-reveal", {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <main ref={containerRef} className="pt-48 pb-32 bg-cream min-h-screen">
+            <div className="container mx-auto px-6 max-w-7xl">
+                <div className="text-center mb-24 max-w-3xl mx-auto header-reveal">
+                    <h1 className="font-serif text-5xl md:text-7xl text-charcoal mb-6 leading-tight">Le Nostre Sedi</h1>
+                    <p className="font-sans text-xl text-charcoal/70 leading-relaxed">
+                        Tre saloni esclusivi nel cuore di Roma, progettati per offrirti un'esperienza di bellezza assoluta in un ambiente caldo e raffinato.
+                    </p>
+                </div>
+
+                <div className="locations-container flex flex-col gap-32">
+                    {SEDI_DATA.map((sede, index) => (
+                        <div key={sede.id} className={`location-block flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-24 items-center`}>
+
+                            {/* Image Side */}
+                            <div className="w-full lg:w-1/2">
+                                <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden group">
+                                    <div className="absolute inset-0 bg-charcoal/10 group-hover:bg-transparent transition-colors duration-700 z-10"></div>
+                                    <img src={sede.image} alt={sede.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                                </div>
+                            </div>
+
+                            {/* Content Side */}
+                            <div className="w-full lg:w-1/2 flex flex-col justify-center">
+                                <span className="text-gold tracking-[0.2em] font-bold text-sm uppercase mb-4 block">Salone {index + 1}</span>
+                                <h2 className="font-serif text-4xl md:text-5xl text-charcoal mb-10 leading-tight">{sede.title}</h2>
+
+                                <div className="space-y-8 font-sans text-charcoal/80 text-lg">
+                                    <div className="flex items-start gap-4">
+                                        <MapPin className="text-gold shrink-0 mt-1" size={24} />
+                                        <div className="w-full">
+                                            <p className="mb-4">{sede.address}</p>
+                                            <div className="w-full h-48 md:h-64 rounded-2xl overflow-hidden shadow-inner bg-charcoal/5">
+                                                <iframe
+                                                    src={sede.mapIframe}
+                                                    width="100%"
+                                                    height="100%"
+                                                    style={{ border: 0 }}
+                                                    allowFullScreen=""
+                                                    loading="lazy"
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    title={`Map for ${sede.title}`}
+                                                ></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-4">
+                                        <Clock className="text-gold shrink-0 mt-1" size={24} />
+                                        <p>{sede.hours}</p>
+                                    </div>
+                                    <div className="flex items-start gap-4">
+                                        <Phone className="text-gold shrink-0 mt-1" size={24} />
+                                        <div className="flex flex-col gap-1">
+                                            {sede.phones.map((phone, i) => (
+                                                <a key={i} href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-gold transition-colors">{phone}</a>
+                                            ))}
+                                            {sede.whatsapp && (
+                                                <a href={`https://wa.me/39${sede.whatsapp.replace(/\s/g, '')}`} target="_blank" rel="noreferrer" className="text-green-600 hover:text-green-500 transition-colors flex items-center gap-2 mt-2">
+                                                    WhatsApp: {sede.whatsapp}
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-4">
+                                        <Mail className="text-gold shrink-0 mt-1" size={24} />
+                                        <a href={`mailto:${sede.email}`} className="hover:text-gold transition-colors break-all">{sede.email}</a>
+                                    </div>
+
+                                    <div className="h-px w-24 bg-charcoal/10 my-8"></div>
+
+                                    <div className="flex flex-col gap-3 text-base">
+                                        <a href={`https://instagram.com/${sede.instagram}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 hover:text-gold transition-colors">
+                                            <Instagram size={20} className="text-charcoal" /> <span>@{sede.instagram}</span>
+                                        </a>
+                                        <a href={`https://facebook.com/${sede.facebook}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 hover:text-gold transition-colors">
+                                            <Facebook size={20} className="text-charcoal" /> <span>{sede.facebook}</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <a href={`tel:${sede.phones[0].replace(/\s/g, '')}`} className="mt-12 btn-secondary w-fit px-10 py-4 text-sm tracking-widest uppercase inline-block text-center">
+                                    Richiedi Appuntamento
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </main>
+    );
+};
+
+const BEAUTY_TREATMENTS = [
+    {
+        id: "dermaplaning",
+        title: "Dermaplaning",
+        intro: "Esfoliazione profonda per una pelle luminosa e tonica.",
+        desc: "E’ un’esfoliazione meccanica della pelle del viso praticata attraverso uno speciale bisturi che rimuove lo strato corneo superficiale (dove si depositano cellule morte, smog e impurità). I benefici sono tanti: la pelle non è mai stata così morbida e liscia, contrastando l'invecchiamento e stimolando la produzione di collagene. Ideale da ripetere una volta al mese.",
+        image: treatDermaplaning
+    },
+    {
+        id: "laminazione",
+        title: "Laminazione Ciglia",
+        intro: "Ciglia robuste, nutrite e curve effetto cerbiatta.",
+        desc: "Il trattamento alla cheratina restituisce corpo e spessore alle ciglia. Attraverso componenti naturali, dona una curvatura permanente e un aspetto straordinario che dura 5-6 settimane. Per un risultato eccellente, rinforza, protegge dai raggi solari e rigenera la vitalità dello sguardo.",
+        image: treatLaminazione
+    },
+    {
+        id: "laser",
+        title: "Laser Diodo 810nm",
+        intro: "L'evoluzione dell'epilazione progressivamente definitiva.",
+        desc: "Il Laser a Diodo a Fibra ottica emette un fascio di luce a 810nm il cui bersaglio è la melanina del pelo, contenuta nel bulbo pilifero. La trasmissione tramite fibra ottica assicura maggiore efficacia. Adatto a tutti i fototipi, riduce progressivamente la crescita dei peli per risultati duraturi nel tempo.",
+        image: treatLaser
+    },
+    {
+        id: "makeup",
+        title: "Make-Up",
+        intro: "Consigli ed esecuzioni perfette per risaltare il tuo viso.",
+        desc: "Il nostro make-up è studiato in base alle tue caratteristiche e all'età. Scegliamo texture leggere per le basi, esaltiamo la naturale luce degli zigomi e lavoriamo con il chiaro-scuro per creare le giuste illusioni ottiche, valorizzandoti con eleganza ed evitando gli eccessi.",
+        image: treatMakeUp
+    },
+    {
+        id: "microblading",
+        title: "Microblading",
+        intro: "Effetto pelo ultra-realistico per l'arcata sopraccigliare.",
+        desc: "Una tecnica manuale di trucco semipermanente che traccia microincisioni introducendo pigmenti bioriassorbibili sotto la cute. Ideale per correggere diradamenti o ridisegnare la forma, il risultato finale è estremamente naturale, tanto da dimenticarsi del trattamento.",
+        image: treatMicroblading
+    },
+    {
+        id: "nails",
+        title: "Nail Care & Ricostruzione",
+        intro: "Mani e unghie sempre perfette e curate.",
+        desc: "Offriamo Smalto Semipermanente per un finish curato e radioso fino a 3 settimane, oppure Ricostruzione Gel per unghie resistenti ed elegantemente modellate. Eseguiti da personale esperto nel totale rispetto dell'unghia naturale e delle condizioni igieniche.",
+        image: treatNails
+    },
+    {
+        id: "permanent",
+        title: "Trucco Permanente (Dermopigmentazione)",
+        intro: "Make up sempre impeccabile, in ogni situazione.",
+        desc: "Perfetto per chi ama lo sport, porta lenti a contatto o desidera correggere asimmetrie su labbra, occhi o sopracciglia. Utilizziamo pigmenti naturali e certificati per un effetto duraturo (1-2 anni), ripristinando armonia e freschezza al viso in modo sicuro e professionale.",
+        image: treatPermanentMakeup
+    },
+    {
+        id: "pressoterapia",
+        title: "Pressoterapia",
+        intro: "Drenaggio profondo contro ritenzione e inestetismi.",
+        desc: "Trattamento efficace per ripristinare la corretta circolazione venosa e linfatica. La stimolazione tramite le guaine gonfiabili drena i liquidi ristagnanti, rassoda i tessuti di gambe, glutei e addome, ed aiuta a ridurre visibilmente cellulite e gonfiore.",
+        image: treatPressoterapia
+    },
+    {
+        id: "radiofrequenza",
+        title: "Radiofrequenza Viso/Corpo",
+        intro: "Lifting non chirurgico che stimola nuovo collagene.",
+        desc: "Una tecnica innovativa che sfrutta onde radio per sviluppare calore controllato nel derma profondo. Ottimo per trattare le rughe d'espressione, la lassità cutanea e le smagliature, rendendo la pelle notevolmente più elastica, liscia, luminosa e compatta.",
+        image: treatRadiofrequenza
+    },
+    {
+        id: "xtreme",
+        title: "Xtreme Lashes®",
+        intro: "L'eccellenza globale nell'estensione ciglia.",
+        desc: "Allunga e infoltisce le tue ciglia in modo estremamente naturale con fibre sintetiche leggerissime, applicate una ad una. Resistenti all'acqua e al sudore, permettono di dire addio al mascara restando impeccabili per mesi (con ricariche periodiche mensili).",
+        image: treatXtremeLashes
+    }
+];
+
+// --- Nails Section Component ---
+const NailsSection = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".nails-reveal", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-24 md:py-32 bg-charcoal text-white relative overflow-hidden">
+            <div className="container mx-auto px-6 max-w-6xl">
+                <div className="text-center mb-16 nails-reveal">
+                    <span className="text-gold font-sans tracking-[0.3em] uppercase mb-4 block text-sm">La Cura delle Tue Mani</span>
+                    <h2 className="font-serif text-4xl md:text-6xl mb-6">Nails & Manicure</h2>
+                    <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto font-sans font-light">
+                        Mani e unghie ben curate sono un ottimo biglietto da visita. Scopri la differenza tra i nostri trattamenti e impara a prendertene cura, anche da casa.
+                    </p>
+                </div>
+
+                <div className="flex flex-col lg:flex-row gap-16 items-start mt-20">
+                    {/* Left Column: Text Content */}
+                    <div className="lg:w-1/2 space-y-12">
+                        <div className="nails-reveal">
+                            <h3 className="text-3xl font-serif text-gold mb-4">Smalto Semipermanente vs Gel</h3>
+                            <p className="text-white/80 leading-relaxed font-sans text-lg space-y-4">
+                                Lo <strong className="text-white">Smalto Semipermanente</strong> è una copertura estetica che assicura un aspetto curato e radioso per 2-3 settimane. Aumenta leggermente lo spessore dell'unghia ed è di rapida applicazione, ma offre meno resistenza rispetto al gel.
+                                <br /><br />
+                                La <strong className="text-white">Ricostruzione con Gel</strong>, invece, garantisce un effetto bombato, permette di ricostruire unghie spezzate e offre una resistenza nettamente superiore. Permette inoltre allungamenti con cartina o tip, proteggendo l'unghia naturale se eseguita da operatori qualificati.
+                            </p>
+                        </div>
+                        
+                        <div className="nails-reveal pl-6 border-l-2 border-gold/30">
+                            <h4 className="text-2xl font-serif italic mb-4">I Nostri Consigli per Unghie Sane</h4>
+                            <ul className="space-y-3 text-white/70 font-sans">
+                                <li>• Utilizza sempre <strong>guanti protettivi</strong> per i lavori domestici: l'umidità facilita germi e batteri.</li>
+                                <li>• Evita lunghi ammolli in saune, bagni turchi o piscine se hai applicato gel o semipermanente.</li>
+                                <li>• <strong>Non "mangiarti le unghie"</strong> e non usarle come attrezzi (es. per togliere le graffette).</li>
+                                <li>• Applica crema idratante più volte al giorno per mantenerle morbide.</li>
+                                <li>• Cura l'alimentazione: cibi proteici o verdure sulfuree aiutano la formazione di cheratina.</li>
+                                <li className="text-gold/90 pt-2 break-normal"><em>E soprattutto: mai togliere il gel con metodi "fai-da-te" limando l'unghia, potresti danneggiare il letto ungueale!</em></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Image Composition */}
+                    <div className="lg:w-1/2 relative w-full h-[600px] sm:h-[700px] mt-12 lg:mt-0">
+                        <div className="absolute top-0 right-0 w-3/4 h-[70%] rounded-[2rem] overflow-hidden shadow-2xl nails-reveal z-10 border border-white/10">
+                            <img src={nailsImg2} alt="Lavorazione Nails" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="absolute bottom-0 left-0 w-2/3 h-[55%] rounded-[2rem] overflow-hidden shadow-2xl nails-reveal z-20 border-4 border-charcoal">
+                            <img src={nailsImg1} alt="Dettaglio Smalto" className="w-full h-full object-cover grayscale sepia-[0.3]" />
+                        </div>
+                        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/4 w-1/3 aspect-square rounded-full overflow-hidden shadow-2xl nails-reveal z-30 border-2 border-gold/30">
+                            <img src={nailsImg3} alt="Risultato Manicure" className="w-full h-full object-cover" />
+                        </div>
+                        {/* Abstract glow */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold/5 blur-[100px] rounded-full pointer-events-none -z-10" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const BeautyCenterPage = () => {
+    const mainRef = useRef(null);
+    const [openTreatmentId, setOpenTreatmentId] = useState("dermaplaning");
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Hero Animation
+            gsap.from(".beauty-hero-text > *", {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power2.out",
+                delay: 0.2
+            });
+
+            // Section Reveals
+            gsap.utils.toArray('.beauty-reveal').forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                    },
+                    y: 60,
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power3.out"
+                });
+            });
+
+            // Image Parallax
+            gsap.utils.toArray('.beauty-parallax').forEach(img => {
+                gsap.to(img, {
+                    scrollTrigger: {
+                        trigger: img.closest('section'),
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true
+                    },
+                    y: 100,
+                    scale: 1.1,
+                    ease: "none"
+                });
+            });
+        }, mainRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <main ref={mainRef} className="bg-cream min-h-screen">
+            {/* HERO SECTION */}
+            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src={beautyHero}
+                        alt="Beauty Center & Relax"
+                        className="w-full h-full object-cover beauty-parallax origin-top"
+                    />
+                    <div className="absolute inset-0 bg-charcoal/40" />
+                </div>
+                <div className="container mx-auto px-6 relative z-10 text-center beauty-hero-text">
+                    <span className="text-gold font-sans tracking-[0.3em] uppercase mb-4 block text-sm">
+                        I Barberini
+                    </span>
+                    <h1 className="font-serif text-5xl md:text-7xl text-white mb-6 drop-shadow-xl">
+                        Beauty & Relax
+                    </h1>
+                    <p className="font-sans text-xl text-white/90 max-w-2xl mx-auto italic drop-shadow-md">
+                        Un’oasi di puro benessere nel cuore di Monteverde. Un luogo che abbraccia i tuoi sensi e rigenera la mente.
+                    </p>
+                </div>
+            </section>
+
+            {/* AMBIENTE SECTION (Masonry Layout) */}
+            <section className="py-24 md:py-32 container mx-auto px-6 beauty-reveal">
+                <div className="flex flex-col md:flex-row gap-12 items-center mb-16">
+                    <div className="md:w-1/2">
+                        <h2 className="section-title mb-6">Un Tempio per<br /><span className="italic text-charcoal/60">il tuo Benessere</span></h2>
+                    </div>
+                    <div className="md:w-1/2">
+                        <p className="text-xl text-charcoal/80 font-sans leading-relaxed">
+                            Maison di Bellezza da tre generazioni, non si ferma all'Hair, oggi Beauty Center d'Eccellenza in Monteverde. L'eccellenza che unisce salute e bellezza.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="aspect-[4/3] rounded-3xl overflow-hidden relative group">
+                        <img src={beautyBed} alt="Lettino Massaggi" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-charcoal/80 to-transparent">
+                            <h3 className="text-white font-serif text-2xl">Trattamenti Viso & Corpo</h3>
+                        </div>
+                    </div>
+                    <div className="aspect-[4/3] rounded-3xl overflow-hidden relative group md:translate-y-12">
+                        <img src={beautySauna} alt="Sauna" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-charcoal/80 to-transparent">
+                            <h3 className="text-white font-serif text-2xl">Rituali Relax</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* TRATTAMENTI DETTAGLIO */}
+            <section className="py-24 bg-white beauty-reveal">
+                <div className="container mx-auto px-6">
+                    <div className="flex flex-col lg:flex-row gap-16 items-center">
+                        <div className="lg:w-1/2 order-2 lg:order-1 relative">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="aspect-square rounded-[2rem] overflow-hidden mt-8">
+                                    <img src={beautyTreat1} alt="Trattamento" className="w-full h-full object-cover" />
+                                </div>
+                                <div className="aspect-[4/5] rounded-[2rem] overflow-hidden">
+                                    <img src={beautyTreat2} alt="Estetica" className="w-full h-full object-cover" />
+                                </div>
+                            </div>
+                            {/* Decorative element */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gold/10 rounded-full blur-2xl -z-10" />
+                        </div>
+
+                        <div className="lg:w-1/2 order-1 lg:order-2">
+                            <span className="text-gold font-sans font-bold tracking-widest uppercase mb-4 block">Personalizzazione</span>
+                            <h2 className="section-title mb-8">Il Nostro Approccio Estetico</h2>
+                            <p className="text-lg text-charcoal/70 leading-relaxed mb-10">
+                                Diagnosi previe gratuite per analizzare lo stato cutaneo ed il benessere generale, garantendo la scelta dei trattamenti manuali o apparecchiati più performanti per esaltare la tua unicità.
+                            </p>
+                            <button className="btn-primary">RICHIEDI UNA DIAGNOSI OMAGGIO</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* TREATMENTS ACCORDION SECTION */}
+            <section className="py-24 bg-cream beauty-reveal">
+                <div className="container mx-auto px-6 max-w-5xl">
+                    <div className="text-center mb-16">
+                        <span className="text-gold font-sans tracking-widest uppercase mb-4 block text-sm">
+                            Menù dei Servizi
+                        </span>
+                        <h2 className="section-title">I Nostri Trattamenti</h2>
+                        <p className="text-xl text-charcoal/70 mt-6 max-w-2xl mx-auto">
+                            Esplora l'eccellenza delle nostre proposte. Metodologie avanzate e cura del dettaglio per risultati concreti e duraturi.
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        {BEAUTY_TREATMENTS.map((treatment) => {
+                            const isOpen = openTreatmentId === treatment.id;
+                            return (
+                                <div
+                                    key={treatment.id}
+                                    className={`bg-white rounded-2xl overflow-hidden transition-all duration-500 shadow-sm border ${isOpen ? 'border-gold/30 shadow-xl' : 'border-black/5 hover:border-gold/20'}`}
+                                >
+                                    <button
+                                        className="w-full text-left px-8 py-6 flex items-center justify-between group"
+                                        onClick={() => setOpenTreatmentId(isOpen ? null : treatment.id)}
+                                    >
+                                        <div>
+                                            <h3 className={`font-serif text-2xl transition-colors duration-300 ${isOpen ? 'text-gold' : 'text-charcoal group-hover:text-gold'}`}>
+                                                {treatment.title}
+                                            </h3>
+                                            <p className="text-charcoal/60 mt-2 font-sans">{treatment.intro}</p>
+                                        </div>
+                                        <div className={`transform transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${isOpen ? 'rotate-180 text-gold' : 'text-charcoal/40 group-hover:text-gold'}`}>
+                                            <ChevronDown size={28} />
+                                        </div>
+                                    </button>
+
+                                    <div
+                                        className="overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                                        style={{ maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0 }}
+                                    >
+                                        <div className="p-8 pt-0 border-t border-black/5 flex flex-col md:flex-row gap-8 items-start mt-6">
+                                            <div className="md:w-2/3">
+                                                <p className="text-charcoal/80 leading-relaxed font-sans text-lg">
+                                                    {treatment.desc}
+                                                </p>
+                                            </div>
+                                            <div className="md:w-1/3 w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                                                <img src={treatment.image} alt={treatment.title} className="w-full h-full object-cover" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* NAILS SECTION */}
+            <NailsSection />
+        </main>
+    );
+};
+
+const Footer = () => {
+    const footerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from("footer > *", {
+                scrollTrigger: {
+                    trigger: "footer",
+                    start: "top 90%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+        }, footerRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <footer ref={footerRef} className="bg-charcoal text-white pt-24 pb-12 overflow-hidden">
+            <div className="container mx-auto px-6">
+                <div className="grid md:grid-cols-4 gap-12 mb-20">
+                    <div className="md:col-span-2">
+                        <Link to="/" className="mb-8 block hover:opacity-80 transition-opacity">
+                            <img src={logo} alt="I Barberini" className="h-16 w-auto object-contain brightness-0 invert" />
+                        </Link>
+                        <p className="text-white/50 max-w-sm mb-8 leading-relaxed">
+                            Dal 1990, custodi della bellezza a Monteverde. Tradizione, innovazione e passione per l'immagine.
+                        </p>
+                        <div className="flex gap-6">
+                            <a href="#" className="hover:text-gold transition-colors"><Instagram /></a>
+                            <a href="#" className="hover:text-gold transition-colors"><Facebook /></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Contatti</h4>
+                        <ul className="space-y-4 text-white/70">
+                            <li className="flex items-center gap-3"><Phone size={16} /> 06 1234567</li>
+                            <li className="flex items-center gap-3"><MapPin size={16} /> Monteverde, Roma</li>
+                            <li className="flex items-center gap-3"><Clock size={16} /> Lun-Sab: 09-19:30</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Info</h4>
+                        <ul className="space-y-4 text-white/70">
+                            <li><Link to="/sedi" className="hover:text-gold">Dove Siamo</Link></li>
+                            <li><Link to="/beauty-center" className="hover:text-gold">Servizi Estetici</Link></li>
+                            <li><Link to="/collezioni" className="hover:text-gold">Galleria</Link></li>
+                            <li><a href="#" className="hover:text-gold">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div className="flex flex-col md:row justify-between items-center pt-12 border-t border-white/10 text-white/30 text-sm gap-4">
+                    <p>© 2024 I Barberini. Tutti i diritti riservati.</p>
+                    <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        Presenza digitale attiva
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+};
+
+const CollectionDetailPage = () => {
+    const { id } = useParams();
+    const collection = COLLECTIONS.find(c => c.id === id);
+    const mainRef = useRef(null);
+    const [lightboxImage, setLightboxImage] = useState(null);
+
+    // Scroll to top on mount
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
+
+    useEffect(() => {
+        if (!collection) return;
+        const ctx = gsap.context(() => {
+            gsap.from(".collection-hero-text > *", {
+                y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: "power2.out"
+            });
+            gsap.from(".gallery-item", {
+                y: 30, opacity: 0, duration: 0.8, stagger: 0.05, ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".gallery-grid",
+                    start: "top 80%",
+                }
+            });
+            gsap.to(".top-hero-img", {
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: 100,
+                scale: 1.1,
+                ease: "none"
+            });
+        }, mainRef);
+        return () => ctx.revert();
+    }, [collection]);
+
+    if (!collection) return <div className="min-h-screen flex items-center justify-center font-serif text-2xl">Collezione non trovata.</div>;
+
+    return (
+        <main ref={mainRef} className="bg-cream min-h-screen pt-48 pb-24">
+            {/* HERO DEL DECENNIO */}
+            <section className="hero-section relative h-[60vh] md:h-[70vh] w-full mb-24 overflow-hidden rounded-b-[3rem] mx-auto max-w-[98%]">
+                <div className="absolute inset-0 bg-charcoal/50 z-10" />
+                <img
+                    src={collection.image}
+                    alt={collection.title}
+                    className="top-hero-img absolute inset-0 w-full h-full object-cover z-0"
+                />
+                <div className="collection-hero-text absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-6 mt-16">
+                    <span className="text-gold font-sans tracking-widest uppercase mb-4 text-sm md:text-base drop-shadow-md">
+                        Le Nostre Collezioni
+                    </span>
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl text-white font-serif mb-6 drop-shadow-xl">
+                        {collection.title}
+                    </h1>
+                    <p className="text-lg md:text-2xl text-white/90 font-sans max-w-2xl font-light drop-shadow-md">
+                        {collection.desc}
+                    </p>
+                </div>
+            </section>
+
+            {/* GALLERIA IMMAGINI MASONRY */}
+            <section className="container mx-auto px-6">
+                <div className="flex justify-between items-end mb-16 px-4">
+                    <div>
+                        <h2 className="section-title text-charcoal">Il Lookbook</h2>
+                        <p className="font-sans text-charcoal/60 mt-4 max-w-xl">
+                            Esplora tutte le creazioni originali de I Barberini per questa collezione.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="gallery-grid columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                    {collection.images && collection.images.map((imgSrc, idx) => (
+                        <div
+                            key={idx}
+                            className="gallery-item break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer"
+                            onClick={() => setLightboxImage(imgSrc)}
+                        >
+                            <img
+                                src={imgSrc}
+                                alt={`${collection.title} stile ${idx}`}
+                                className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* LIGHTBOX */}
+            {lightboxImage && (
+                <div className="fixed inset-0 z-[200] bg-charcoal/95 backdrop-blur-xl flex items-center justify-center p-4">
+                    <button
+                        className="absolute top-8 right-8 text-white/80 hover:text-white transition-colors"
+                        onClick={() => setLightboxImage(null)}
+                    >
+                        <X size={40} />
+                    </button>
+                    <img
+                        src={lightboxImage}
+                        alt="Zoomed"
+                        className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+                    />
+                </div>
+            )}
+        </main>
+    );
+};
+
+// --- App ---
+
+const App = () => {
+    useEffect(() => {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            smoothTouch: true,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Connect Lenis to ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+
+        return () => {
+            lenis.destroy();
+            gsap.ticker.remove(gsap.ticker.add);
+        };
+    }, []);
+
+    return (
+        <Router>
+            <ScrollToTop />
+            <div className="min-h-screen flex flex-col font-sans text-charcoal relative">
+                <ScrollBackground />
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/collezioni" element={<CollectionsPage />} />
+                    <Route path="/sedi" element={<LocationsPage />} />
+                    <Route path="/beauty-center" element={<BeautyCenterPage />} />
+                    <Route path="/collezioni/:id" element={<CollectionDetailPage />} />
+                </Routes>
+                <Footer />
+            </div>
+        </Router>
+    );
+};
+
+export default App;

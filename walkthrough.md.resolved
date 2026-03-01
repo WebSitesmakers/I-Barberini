@@ -1,0 +1,57 @@
+# I Barberini — Walkthrough del Progetto
+
+Il sito web per **I Barberini** è stato completato seguendo rigorosamente il preset **Midnight Luxe (Preset B)** del Cinematic Landing Page Builder. Il risultato è uno strumento digitale ad alta fedeltà, oscuramente editoriale e raffinato.
+
+## 🗝️ Caratteristiche Principali
+
+- **Estetica Midnight Luxe**: Palette Ossidiana (`#0D0D12`) e Champagne (`#C9A84C`), font *Inter* e *Playfair Display*.
+- **Animazioni Luxury & Shine**:
+  - **Luxury Underline**: I link della navbar si animano con una sottolineatura Champagne che si espande dal centro all'hover.
+  - **Shine Effect**: Un raggio di luce attraversa i pulsanti "Prenota" e "Scopri" all'hover, donando un feedback premium e dinamico.
+  - **Magnetic Pull**: I pulsanti principali seguono delicatamente il cursore, creando un feeling tattile sofisticato.
+- **Gallerie Foto**: Pagine dedicate con masonry grid e lightbox per ogni collezione.
+
+---
+
+## 📸 Anteprima Visuale
+
+### Hero Section — "The Opening Shot"
+La hero si apre con un'immagine full-bleed del salone e un contrasto tipografico massiccio tra il font Sans e il Drama Serif Italic.
+
+![Hero Section](/home/user/.gemini/antigravity/brain/62a6971d-6e41-49bb-9bc2-b7669e26ba05/hero_section_1772119122648.png)
+
+### Video — "The Digital Interface in Action"
+Ecco una registrazione delle nuove animazioni luxury (Shine e Underline) in azione:
+
+![Animazioni Luxury](/home/user/.gemini/antigravity/brain/62a6971d-6e41-49bb-9bc2-b7669e26ba05/barberini_refined_animations_11722116500331_v8_final_-62135596800000.webp)
+
+### Collezioni — "Tre decenni di storia"
+La sezione collezioni permette di navigare nelle diverse ere dello stile dei Barberini. La card **Spose** è stata resa prominente come richiesto.
+
+![Sezione Collezioni](/home/user/.gemini/antigravity/brain/62a6971d-6e41-49bb-9bc2-b7669e26ba05/collections_grid_1772119189196.png)
+
+### Galleria — "Anni '90" e "Spose"
+Le gallerie utilizzano un layout dinamico per valorizzare le immagini d'archivio e i lavori più recenti.
+
+````carousel
+![Galleria Anni 90](/home/user/.gemini/antigravity/brain/62a6971d-6e41-49bb-9bc2-b7669e26ba05/gallery_anni_90_1772119241466.png)
+<!-- slide -->
+![Galleria Spose](/home/user/.gemini/antigravity/brain/62a6971d-6e41-49bb-9bc2-b7669e26ba05/gallery_spose_1772119299622.png)
+````
+
+---
+
+## 🛠️ Modifiche e Ottimizzazioni
+
+- **Responsive**: Implementate media-queries specifiche per i font drammatici, garantendo che non trabocchino su schermi mobile.
+- **Fix Immagini**: Sostituiti tutti i link Unsplash interrotti o non pertinenti (es. rimossa immagine supermarket nella sezione spose) con contenuti focalizzati sull'hair styling professionale.
+- **Performance**: Utilizzo di `gsap.context()` per una gestione pulita delle animazioni e React-Router per una navigazione istantanea tra home e gallerie.
+
+---
+
+## 🚀 Come avviare il sito localmente
+
+1. Assicurati di essere nella cartella `/home/user/Documenti/Prova antigravity`
+2. Esegui `npm install` (se non già fatto)
+3. Avvia con `npm run dev`
+4. Apri l'URL locale nel browser (solitamente `http://localhost:5173/`)
