@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tuo-username.github.io/I-Barberini/sitemap.xml
+Sitemap: https://ibarberini.it/sitemap.xml

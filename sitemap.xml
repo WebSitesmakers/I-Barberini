@@ -2,28 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home Page -->
   <url>
-    <loc>https://tuo-username.github.io/I-Barberini/</loc>
+    <loc>https://ibarberini.it/</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <!-- Sedi -->
   <url>
-    <loc>https://tuo-username.github.io/I-Barberini/sedi</loc>
+    <loc>https://ibarberini.it/sedi</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Collezioni -->
   <url>
-    <loc>https://tuo-username.github.io/I-Barberini/collezioni</loc>
+    <loc>https://ibarberini.it/collezioni</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Beauty Center -->
   <url>
-    <loc>https://tuo-username.github.io/I-Barberini/beauty-center</loc>
+    <loc>https://ibarberini.it/beauty-center</loc>
     <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
