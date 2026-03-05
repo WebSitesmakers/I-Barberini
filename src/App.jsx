@@ -1006,7 +1006,7 @@ const BEAUTY_TREATMENTS = [
 ];
 
 // --- Nails Section Component ---
-const NailsSection = () => {
+const NailsSection = ({ onOpenGallery }) => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -1032,9 +1032,17 @@ const NailsSection = () => {
                 <div className="text-center mb-16 nails-reveal">
                     <span className="text-gold font-sans tracking-[0.3em] uppercase mb-4 block text-sm">La Cura delle Tue Mani</span>
                     <h2 className="font-serif text-4xl md:text-6xl mb-6">Nails & Manicure</h2>
-                    <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto font-sans font-light">
+                    <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto font-sans font-light mb-8">
                         Mani e unghie ben curate sono un ottimo biglietto da visita. Scopri la differenza tra i nostri trattamenti e impara a prendertene cura, anche da casa.
                     </p>
+                    {onOpenGallery && (
+                        <button 
+                            onClick={onOpenGallery}
+                            className="inline-flex items-center gap-3 px-8 py-4 border border-gold/50 text-gold hover:bg-gold hover:text-charcoal rounded-xl transition-all duration-300 font-sans tracking-widest text-sm"
+                        >
+                            <Camera size={18} /> VEDI GALLERIA
+                        </button>
+                    )}
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-16 items-start mt-20">
@@ -1401,7 +1409,7 @@ const BeautyCenterPage = () => {
             </section>
 
             {/* NAILS SECTION */}
-            <NailsSection />
+            <NailsSection onOpenGallery={() => setActiveGallery({ images: treatNailsImgs, index: 0 })} />
 
             {/* Overlays */}
             <Lightbox 
