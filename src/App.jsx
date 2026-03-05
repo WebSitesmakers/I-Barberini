@@ -6,7 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
     Menu, X, Scissors, Heart, MapPin,
     Sparkles, Clock, Phone, Instagram,
-    Facebook, ArrowRight, Camera, Star, Calendar, ChevronDown, Mail
+    Facebook, ArrowRight, Camera, Star, Calendar, ChevronDown, Mail,
+    ArrowLeft
 } from 'lucide-react';
 import logo from './assets/logo.png';
 import heroImg from './assets/HERO.webp';
@@ -43,6 +44,12 @@ import nailsImg3 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 18.webp';
 
 // Chi Siamo Image
 import doriano1985 from './assets/Collezioni/Anni 90/Doriano 1985.webp';
+
+// Keratin Section
+import keratinaPdf from './assets/KERATINA.pdf';
+import keratinaImg from './assets/Collezioni/Anni 2020/I BARBERINI 35 2022.webp';
+
+import { treatmentsContent } from './data/treatmentsContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,11 +92,25 @@ const importAllImages = (globResult) => {
     return Object.values(globResult).map((module) => module.default);
 };
 
-const images90s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 90/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
-const images00s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2000/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
-const images10s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2010/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
-const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG}', { eager: true }));
+const images90s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 90/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const images00s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2000/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const images10s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2010/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const imagesSpose = importAllImages(import.meta.glob('./assets/Collezioni/LE SPOSE/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+
+// Dynamic Imports for Beauty Treatments
+const treatDermaplaningImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/DERMAPLANING/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatLaminazioneImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/LAMINAZIONE CIGLIA/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatLaserImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/LASER  DIODO/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatMakeUpImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/MAKE-UP/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatMicrobladingImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/MICROBLADING/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatNailsImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/NAILS/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatPermanentMakeupImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/PERMANENT MAKE UP/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatPressoterapiaImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/PRESSOTERAPIA/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatRadiofrequenzaImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/TRATTAMENTO VISO/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatXtremeLashesImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/XTREME LASHES/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatSolariumImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/SOLARIUM/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatPedicureImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/PEDICURE/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 
 
 const COLLECTIONS = [
@@ -378,39 +399,7 @@ const Method = () => {
     );
 };
 
-const Lightbox = ({ images, onClose }) => {
-    const [current, setCurrent] = useState(0);
 
-    return (
-        <div className="fixed inset-0 z-[100] bg-charcoal flex flex-col items-center justify-center p-6">
-            <button onClick={onClose} className="absolute top-8 right-8 text-white hover:text-gold transition-colors">
-                <X size={40} />
-            </button>
-            <div className="relative max-w-4xl w-full aspect-square md:aspect-video flex items-center justify-center">
-                <img
-                    src={images[current]}
-                    alt="Gallery"
-                    className="max-w-full max-h-full object-contain shadow-2xl animate-fade-in"
-                />
-                <button
-                    className="absolute left-4 p-4 text-white/50 hover:text-white"
-                    onClick={() => setCurrent((current - 1 + images.length) % images.length)}
-                >
-                    <ArrowRight className="rotate-180" size={32} />
-                </button>
-                <button
-                    className="absolute right-4 p-4 text-white/50 hover:text-white"
-                    onClick={() => setCurrent((current + 1) % images.length)}
-                >
-                    <ArrowRight size={32} />
-                </button>
-            </div>
-            <div className="mt-8 flex gap-4 text-white/50 font-sans">
-                {current + 1} / {images.length}
-            </div>
-        </div>
-    );
-};
 
 const AmbientiSection = () => {
     const sectionRef = useRef(null);
@@ -590,6 +579,75 @@ const BrandsSection = () => {
 
 // --- Pages ---
 
+const KeratinSection = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".keratin-text", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+            gsap.from(".keratin-img", {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                x: -50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section ref={sectionRef} className="py-32 bg-white overflow-hidden">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col lg:flex-row-reverse gap-16 items-center">
+                    <div className="lg:w-1/2 keratin-text">
+                        <span className="text-gold font-sans tracking-[0.2em] uppercase mb-4 block text-sm">Innovazione & Cura</span>
+                        <h2 className="section-title mb-8">Trattamenti alla Keratina</h2>
+                        <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-6 italic">Per capelli sani, forti e luminosi</h3>
+                        <div className="space-y-6 text-charcoal/80 font-sans leading-relaxed text-lg mb-10">
+                            <p>
+                                Il nostro speciale trattamento alla keratina ricostruisce la fibra capillare dall'interno, restituendo corpo e lucentezza anche ai capelli più indisciplinati o crespi. 
+                            </p>
+                            <p>
+                                Un rituale di rigenerazione che unisce la tecnica a prodotti di altissima qualità, per garantirti un liscio perfetto, naturale e un capello protetto nel tempo.
+                            </p>
+                        </div>
+                        <a 
+                            href={keratinaPdf} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn-primary inline-flex items-center gap-2"
+                        >
+                            SCOPRI DI PIÙ
+                        </a>
+                    </div>
+                    <div className="lg:w-1/2 w-full aspect-[4/5] object-contain md:h-[600px] rounded-[2rem] overflow-hidden keratin-img relative shadow-2xl">
+                        <img 
+                            loading="lazy"
+                            src={keratinaImg} 
+                            alt="Trattamento alla Keratina" 
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-charcoal/10 mix-blend-multiply"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
 const HomePage = () => {
     const mainRef = useRef(null);
 
@@ -613,6 +671,7 @@ const HomePage = () => {
         <main ref={mainRef}>
             <Hero />
             <ValueSection />
+            <KeratinSection />
             <ChiSiamoSection />
             <Philosophy />
             <section className="py-24 bg-cream reveal-up">
@@ -786,7 +845,6 @@ const LocationsPage = () => {
 
                             {/* Content Side */}
                             <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                                <span className="text-gold tracking-[0.2em] font-bold text-sm uppercase mb-4 block">Salone {index + 1}</span>
                                 <h2 className="font-serif text-4xl md:text-5xl text-charcoal mb-10 leading-tight">{sede.title}</h2>
 
                                 <div className="space-y-8 font-sans text-charcoal/80 text-lg">
@@ -860,70 +918,90 @@ const BEAUTY_TREATMENTS = [
         title: "Dermaplaning",
         intro: "Esfoliazione profonda per una pelle luminosa e tonica.",
         desc: "E’ un’esfoliazione meccanica della pelle del viso praticata attraverso uno speciale bisturi che rimuove lo strato corneo superficiale (dove si depositano cellule morte, smog e impurità). I benefici sono tanti: la pelle non è mai stata così morbida e liscia, contrastando l'invecchiamento e stimolando la produzione di collagene. Ideale da ripetere una volta al mese.",
-        image: treatDermaplaning
+        image: treatDermaplaning,
+        images: treatDermaplaningImgs,
+        extendedText: treatmentsContent["DERMAPLANING"]
     },
     {
         id: "laminazione",
         title: "Laminazione Ciglia",
         intro: "Ciglia robuste, nutrite e curve effetto cerbiatta.",
         desc: "Il trattamento alla cheratina restituisce corpo e spessore alle ciglia. Attraverso componenti naturali, dona una curvatura permanente e un aspetto straordinario che dura 5-6 settimane. Per un risultato eccellente, rinforza, protegge dai raggi solari e rigenera la vitalità dello sguardo.",
-        image: treatLaminazione
+        image: treatLaminazione,
+        images: treatLaminazioneImgs,
+        extendedText: treatmentsContent["LAMINAZIONE CIGLIA"]
     },
     {
         id: "laser",
         title: "Laser Diodo 810nm",
         intro: "L'evoluzione dell'epilazione progressivamente definitiva.",
         desc: "Il Laser a Diodo a Fibra ottica emette un fascio di luce a 810nm il cui bersaglio è la melanina del pelo, contenuta nel bulbo pilifero. La trasmissione tramite fibra ottica assicura maggiore efficacia. Adatto a tutti i fototipi, riduce progressivamente la crescita dei peli per risultati duraturi nel tempo.",
-        image: treatLaser
+        image: treatLaser,
+        images: treatLaserImgs,
+        extendedText: treatmentsContent["LASER  DIODO"]
     },
     {
         id: "makeup",
         title: "Make-Up",
         intro: "Consigli ed esecuzioni perfette per risaltare il tuo viso.",
         desc: "Il nostro make-up è studiato in base alle tue caratteristiche e all'età. Scegliamo texture leggere per le basi, esaltiamo la naturale luce degli zigomi e lavoriamo con il chiaro-scuro per creare le giuste illusioni ottiche, valorizzandoti con eleganza ed evitando gli eccessi.",
-        image: treatMakeUp
+        image: treatMakeUp,
+        images: treatMakeUpImgs,
+        extendedText: treatmentsContent["MAKE-UP"]
     },
     {
         id: "microblading",
         title: "Microblading",
         intro: "Effetto pelo ultra-realistico per l'arcata sopraccigliare.",
         desc: "Una tecnica manuale di trucco semipermanente che traccia microincisioni introducendo pigmenti bioriassorbibili sotto la cute. Ideale per correggere diradamenti o ridisegnare la forma, il risultato finale è estremamente naturale, tanto da dimenticarsi del trattamento.",
-        image: treatMicroblading
+        image: treatMicroblading,
+        images: treatMicrobladingImgs,
+        extendedText: treatmentsContent["MICROBLADING"]
     },
     {
         id: "nails",
         title: "Nail Care & Ricostruzione",
         intro: "Mani e unghie sempre perfette e curate.",
         desc: "Offriamo Smalto Semipermanente per un finish curato e radioso fino a 3 settimane, oppure Ricostruzione Gel per unghie resistenti ed elegantemente modellate. Eseguiti da personale esperto nel totale rispetto dell'unghia naturale e delle condizioni igieniche.",
-        image: treatNails
+        image: treatNails,
+        images: treatNailsImgs,
+        extendedText: treatmentsContent["NAILS"]
     },
     {
         id: "permanent",
         title: "Trucco Permanente (Dermopigmentazione)",
         intro: "Make up sempre impeccabile, in ogni situazione.",
         desc: "Perfetto per chi ama lo sport, porta lenti a contatto o desidera correggere asimmetrie su labbra, occhi o sopracciglia. Utilizziamo pigmenti naturali e certificati per un effetto duraturo (1-2 anni), ripristinando armonia e freschezza al viso in modo sicuro e professionale.",
-        image: treatPermanentMakeup
+        image: treatPermanentMakeup,
+        images: treatPermanentMakeupImgs,
+        extendedText: treatmentsContent["PERMANENT MAKE UP"]
     },
     {
         id: "pressoterapia",
         title: "Pressoterapia",
         intro: "Drenaggio profondo contro ritenzione e inestetismi.",
         desc: "Trattamento efficace per ripristinare la corretta circolazione venosa e linfatica. La stimolazione tramite le guaine gonfiabili drena i liquidi ristagnanti, rassoda i tessuti di gambe, glutei e addome, ed aiuta a ridurre visibilmente cellulite e gonfiore.",
-        image: treatPressoterapia
+        image: treatPressoterapia,
+        images: treatPressoterapiaImgs,
+        extendedText: treatmentsContent["PRESSOTERAPIA"]
     },
     {
         id: "radiofrequenza",
         title: "Radiofrequenza Viso/Corpo",
         intro: "Lifting non chirurgico che stimola nuovo collagene.",
         desc: "Una tecnica innovativa che sfrutta onde radio per sviluppare calore controllato nel derma profondo. Ottimo per trattare le rughe d'espressione, la lassità cutanea e le smagliature, rendendo la pelle notevolmente più elastica, liscia, luminosa e compatta.",
-        image: treatRadiofrequenza
+        image: treatRadiofrequenza,
+        images: treatRadiofrequenzaImgs,
+        extendedText: treatmentsContent["TRATTAMENTO VISO"]
     },
     {
         id: "xtreme",
         title: "Xtreme Lashes®",
         intro: "L'eccellenza globale nell'estensione ciglia.",
         desc: "Allunga e infoltisce le tue ciglia in modo estremamente naturale con fibre sintetiche leggerissime, applicate una ad una. Resistenti all'acqua e al sudore, permettono di dire addio al mascara restando impeccabili per mesi (con ricariche periodiche mensili).",
-        image: treatXtremeLashes
+        image: treatXtremeLashes,
+        images: treatXtremeLashesImgs,
+        extendedText: treatmentsContent["XTREME LASHES"]
     }
 ];
 
@@ -1004,9 +1082,111 @@ const NailsSection = () => {
     );
 };
 
+const TreatmentDetailsOverlay = ({ isOpen, onClose, title, content }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+            <div 
+                className="absolute inset-0 bg-charcoal/40 backdrop-blur-md"
+                onClick={onClose}
+            />
+            <div className="bg-white rounded-[2rem] w-full max-w-4xl max-h-[90vh] overflow-hidden relative shadow-2xl flex flex-col">
+                <div className="p-8 border-b border-gold/10 flex justify-between items-center bg-white sticky top-0 z-10">
+                    <div>
+                        <span className="text-gold font-sans tracking-widest uppercase text-xs mb-2 block">Dettagli Trattamento</span>
+                        <h2 className="text-3xl font-serif text-charcoal">{title}</h2>
+                    </div>
+                    <button 
+                        onClick={onClose}
+                        className="p-3 hover:bg-gold/10 rounded-full transition-colors group"
+                    >
+                        <X className="w-8 h-8 text-charcoal group-hover:rotate-90 transition-transform duration-300" />
+                    </button>
+                </div>
+                <div className="p-8 md:p-12 overflow-y-auto font-sans leading-relaxed text-charcoal/80 space-y-6">
+                    {content.split('\n\n').map((paragraph, idx) => (
+                        <p key={idx} className="text-lg">
+                            {paragraph.split('\n').map((line, lIdx) => (
+                                <React.Fragment key={lIdx}>
+                                    {line}
+                                    {lIdx < paragraph.split('\n').length - 1 && <br />}
+                                </React.Fragment>
+                            ))}
+                        </p>
+                    ))}
+                </div>
+                <div className="p-8 border-t border-gold/10 text-center bg-cream/30">
+                    <p className="font-serif italic text-charcoal/60">I Barberini — Eccellenza e Cura dal 1990</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Lightbox = ({ images, currentIndex, isOpen, onClose, onPrev, onNext }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur-xl flex flex-col">
+            <div className="absolute top-8 right-8 z-[110]">
+                <button 
+                    onClick={onClose}
+                    className="p-3 hover:bg-white/10 rounded-full transition-colors group"
+                >
+                    <X className="w-8 h-8 text-white group-hover:rotate-90 transition-transform duration-300" />
+                </button>
+            </div>
+
+            <div className="flex-1 flex items-center justify-center relative px-4">
+                {images.length > 1 && (
+                    <>
+                        <button 
+                            onClick={onPrev}
+                            className="absolute left-4 md:left-8 p-4 hover:bg-white/10 rounded-full text-white transition-all transform hover:scale-110 z-[110]"
+                        >
+                            <ArrowLeft className="w-8 h-8" />
+                        </button>
+                        <button 
+                            onClick={onNext}
+                            className="absolute right-4 md:right-8 p-4 hover:bg-white/10 rounded-full text-white transition-all transform hover:scale-110 z-[110]"
+                        >
+                            <ArrowRight className="w-8 h-8" />
+                        </button>
+                    </>
+                )}
+
+                <div className="w-full max-w-5xl aspect-video flex items-center justify-center">
+                    <img 
+                        src={images[currentIndex]} 
+                        alt={`Gallery item ${currentIndex + 1}`}
+                        className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
+                    />
+                </div>
+            </div>
+
+            <div className="h-32 bg-charcoal/50 flex items-center justify-center gap-4 px-6 overflow-x-auto">
+                {images.map((img, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => onNext(idx)}
+                        className={`w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 transition-all ${
+                            idx === currentIndex ? 'ring-2 ring-gold scale-110' : 'opacity-40 hover:opacity-100'
+                        }`}
+                    >
+                        <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 const BeautyCenterPage = () => {
     const mainRef = useRef(null);
     const [openTreatmentId, setOpenTreatmentId] = useState("dermaplaning");
+    const [activeGallery, setActiveGallery] = useState(null);
+    const [activeTextOverlay, setActiveTextOverlay] = useState(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -1177,12 +1357,38 @@ const BeautyCenterPage = () => {
                                     >
                                         <div className="p-8 pt-0 border-t border-black/5 flex flex-col md:flex-row gap-8 items-start mt-6">
                                             <div className="md:w-2/3">
-                                                <p className="text-charcoal/80 leading-relaxed font-sans text-lg">
+                                                <p className="text-charcoal/80 leading-relaxed font-sans text-lg mb-8">
                                                     {treatment.desc}
                                                 </p>
+                                                <div className="flex flex-col sm:flex-row gap-4">
+                                                    {treatment.extendedText && (
+                                                        <button 
+                                                            onClick={() => setActiveTextOverlay({
+                                                                title: treatment.title,
+                                                                content: treatment.extendedText
+                                                            })}
+                                                            className="px-8 py-4 border border-gold/30 rounded-xl text-gold font-sans tracking-widest text-sm hover:bg-gold hover:text-white transition-all duration-300"
+                                                        >
+                                                            COS'È E COME FUNZIONA
+                                                        </button>
+                                                    )}
+                                                    
+                                                    {treatment.images && treatment.images.length > 1 && (
+                                                        <button 
+                                                            onClick={() => setActiveGallery({
+                                                                images: treatment.images,
+                                                                index: 0
+                                                            })}
+                                                            className="px-8 py-4 bg-charcoal text-white rounded-xl font-sans tracking-widest text-sm hover:bg-gold transition-all duration-300"
+                                                        >
+                                                            VEDI GALLERY ({treatment.images.length})
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </div>
-                                            <div className="md:w-1/3 w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
-                                                <img src={treatment.image} alt={treatment.title} className="w-full h-full object-cover" />
+                                            <div className="md:w-1/3 w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg cursor-pointer group/img"
+                                                 onClick={() => treatment.images && treatment.images.length > 1 && setActiveGallery({ images: treatment.images, index: 0 })}>
+                                                <img src={treatment.image} alt={treatment.title} className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110" />
                                             </div>
                                         </div>
                                     </div>
@@ -1191,10 +1397,28 @@ const BeautyCenterPage = () => {
                         })}
                     </div>
                 </div>
+
             </section>
 
             {/* NAILS SECTION */}
             <NailsSection />
+
+            {/* Overlays */}
+            <Lightbox 
+                isOpen={!!activeGallery}
+                images={activeGallery?.images || []}
+                currentIndex={activeGallery?.index || 0}
+                onClose={() => setActiveGallery(null)}
+                onNext={(idx) => setActiveGallery({ ...activeGallery, index: typeof idx === 'number' ? idx : (activeGallery.index + 1) % activeGallery.images.length })}
+                onPrev={() => setActiveGallery({ ...activeGallery, index: (activeGallery.index - 1 + activeGallery.images.length) % activeGallery.images.length })}
+            />
+
+            <TreatmentDetailsOverlay 
+                isOpen={!!activeTextOverlay}
+                onClose={() => setActiveTextOverlay(null)}
+                title={activeTextOverlay?.title}
+                content={activeTextOverlay?.content}
+            />
         </main>
     );
 };
@@ -1220,46 +1444,64 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer ref={footerRef} className="bg-charcoal text-white pt-24 pb-12 overflow-hidden">
+        <footer ref={footerRef} className="bg-charcoal text-white pt-24 pb-12 overflow-hidden rounded-t-[3rem] mt-24">
             <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-4 gap-12 mb-20">
-                    <div className="md:col-span-2">
+                <div className="grid md:grid-cols-3 gap-12 mb-20">
+                    
+                    {/* Brand & Social Column */}
+                    <div>
                         <Link to="/" className="mb-8 block hover:opacity-80 transition-opacity">
                             <img src={logo} alt="I Barberini" className="h-16 w-auto object-contain brightness-0 invert" />
                         </Link>
                         <p className="text-white/50 max-w-sm mb-8 leading-relaxed">
-                            Dal 1990, custodi della bellezza a Monteverde. Tradizione, innovazione e passione per l'immagine.
+                            Dal 1990, custodi della bellezza a Roma. Tradizione, innovazione e passione per l'immagine.
                         </p>
+                        <Link to="/sedi" className="inline-block px-8 py-3 border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-300 font-sans tracking-widest text-xs uppercase mb-8">
+                            Scopri la sede più vicina
+                        </Link>
                         <div className="flex gap-6">
-                            <a href="#" className="hover:text-gold transition-colors"><Instagram /></a>
+                            <a href="https://www.instagram.com/ibarberinihairstudio" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><Instagram /></a>
                             <a href="#" className="hover:text-gold transition-colors"><Facebook /></a>
                         </div>
                     </div>
+
+                    {/* Newsletter Column */}
                     <div>
-                        <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Contatti</h4>
-                        <ul className="space-y-4 text-white/70">
-                            <li className="flex items-center gap-3"><Phone size={16} /> 06 1234567</li>
-                            <li className="flex items-center gap-3"><MapPin size={16} /> Monteverde, Roma</li>
-                            <li className="flex items-center gap-3"><Clock size={16} /> Lun-Sab: 09-19:30</li>
-                        </ul>
+                        <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Resta in contatto</h4>
+                        <p className="text-white/70 mb-6 text-sm">
+                            Iscriviti alla nostra newsletter per ricevere aggiornamenti su eventi, nuove collezioni e promozioni esclusive.
+                        </p>
+                        <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+                            <input 
+                                type="email" 
+                                placeholder="La tua email" 
+                                className="bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors text-white placeholder:text-white/30"
+                                required
+                            />
+                            <button 
+                                type="submit"
+                                className="bg-gold text-charcoal px-4 py-3 text-xs tracking-widest uppercase font-bold hover:bg-white transition-colors"
+                            >
+                                Iscriviti
+                            </button>
+                        </form>
                     </div>
+
+                    {/* Info Column */}
                     <div>
                         <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Info</h4>
                         <ul className="space-y-4 text-white/70">
-                            <li><Link to="/sedi" className="hover:text-gold">Dove Siamo</Link></li>
-                            <li><Link to="/beauty-center" className="hover:text-gold">Servizi Estetici</Link></li>
-                            <li><Link to="/collezioni" className="hover:text-gold">Galleria</Link></li>
-                            <li><a href="#" className="hover:text-gold">Privacy Policy</a></li>
+                            <li><Link to="/sedi" className="hover:text-gold transition-colors">Dove Siamo</Link></li>
+                            <li><Link to="/beauty-center" className="hover:text-gold transition-colors">Servizi Estetici</Link></li>
+                            <li><Link to="/collezioni" className="hover:text-gold transition-colors">Galleria</Link></li>
+                            <li><a href="#" className="hover:text-gold transition-colors">Privacy Policy</a></li>
                         </ul>
                     </div>
+
                 </div>
 
-                <div className="flex flex-col md:row justify-between items-center pt-12 border-t border-white/10 text-white/30 text-sm gap-4">
-                    <p>© 2024 I Barberini. Tutti i diritti riservati.</p>
-                    <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        Presenza digitale attiva
-                    </div>
+                <div className="flex flex-col justify-center items-center pt-12 border-t border-white/10 text-white/30 text-sm gap-4">
+                    <p>© {new Date().getFullYear()} I Barberini. Tutti i diritti riservati.</p>
                 </div>
             </div>
         </footer>
