@@ -517,7 +517,7 @@ const ChiSiamoSection = () => {
                         <img 
                             src={doriano1985} 
                             alt="Doriano 1985 - La Storia de I Barberini" 
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover greyscale sepia-[0.3]"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent mix-blend-multiply"></div>
                     </div>
@@ -1076,7 +1076,7 @@ const NailsSection = ({ onOpenGallery }) => {
                             <img src={nailsImg2} alt="Lavorazione Nails" className="w-full h-full object-cover" />
                         </div>
                         <div className="absolute bottom-0 left-0 w-2/3 h-[55%] rounded-[2rem] overflow-hidden shadow-2xl nails-reveal z-20 border-4 border-charcoal">
-                            <img src={nailsImg1} alt="Dettaglio Smalto" className="w-full h-full object-cover grayscale sepia-[0.3]" />
+                            <img src={nailsImg1} alt="Dettaglio Smalto" className="w-full h-full object-cover" />
                         </div>
                         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/4 w-1/3 aspect-square rounded-full overflow-hidden shadow-2xl nails-reveal z-30 border-2 border-gold/30">
                             <img src={nailsImg3} alt="Risultato Manicure" className="w-full h-full object-cover" />
