@@ -257,7 +257,7 @@ const Hero = () => {
                 </p>
                 <div className="flex flex-col md:flex-row gap-4 justify-center">
                     <Link to="/collezioni" className="btn-primary">SCOPRI LE COLLEZIONI</Link>
-                    <button className="btn-secondary bg-white/10 backdrop-blur-sm text-white border-white/30">PRENOTA ORA</button>
+                    <Link to="/sedi" className="btn-secondary bg-white/10 backdrop-blur-sm text-white border-white/30 text-center flex items-center justify-center">PRENOTA ORA</Link>
                 </div>
             </div>
         </section>
@@ -697,9 +697,9 @@ const HomePage = () => {
                     <p className="mb-10 text-xl max-w-2xl mx-auto italic">
                         Prenota oggi il tuo appuntamento e scopri il piacere di vedersi splendere.
                     </p>
-                    <button className="btn-primary bg-charcoal text-white hover:bg-midnight shadow-2xl mx-auto">
+                    <Link to="/sedi" className="btn-primary bg-charcoal text-white hover:bg-midnight shadow-2xl mx-auto inline-flex items-center justify-center gap-2">
                         PRENOTA ORA <Calendar size={18} />
-                    </button>
+                    </Link>
                 </div>
             </section>
         </main>
