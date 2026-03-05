@@ -253,7 +253,7 @@ const Hero = () => {
                     I Barberini
                 </h1>
                 <p className="font-sans text-xl md:text-2xl text-white/95 mb-10 max-w-2xl mx-auto italic drop-shadow-lg">
-                    L'arte dell'immagine a Roma, nel cuore di Monteverde, dal 1987.
+                    L' arte e l'eleganza dell'immagine a Roma, nel cuore di Roma, dal 1987.
                 </p>
                 <div className="flex flex-col md:flex-row gap-4 justify-center">
                     <Link to="/collezioni" className="btn-primary">SCOPRI LE COLLEZIONI</Link>
