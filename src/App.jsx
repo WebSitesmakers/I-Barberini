@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useLayoutEffect, useMemo } from 'react';
 import Lenis from 'lenis';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -305,7 +306,7 @@ const ValueSection = () => {
                         <Heart className="text-gold" size={40} />
                         <h3 className="font-serif text-2xl uppercase">Spose</h3>
                         <p className="text-charcoal/70 leading-relaxed font-sans">
-                            Uno dei nostri più grandi orgogli. Accompagniamo le spose nel giorno più importante con creazioni uniche e sognanti.
+                            Uno dei nostri più grandi orgogli. Accompagniamo le spose nel giorno più importante con creazioni uniche.
                         </p>
                     </div>
                 </div>
@@ -669,6 +670,10 @@ const HomePage = () => {
 
     return (
         <main ref={mainRef}>
+            <Helmet>
+                <title>I Barberini | L'arte dell'immagine a Roma</title>
+                <meta name="description" content="I Barberini: Maison di Bellezza a Roma dal 1987. Saloni multisede, Beauty Center d'eccellenza, cura dell'immagine per capelli e corpo, specializzati in spose." />
+            </Helmet>
             <Hero />
             <ValueSection />
             <KeratinSection />
@@ -719,6 +724,10 @@ const CollectionsPage = () => {
 
     return (
         <main ref={containerRef} className="pt-48 pb-24 bg-cream min-h-screen">
+            <Helmet>
+                <title>Collezioni e Look | I Barberini</title>
+                <meta name="description" content="Esplora le collezioni e i look creati dagli hair stylist de I Barberini. Lasciati ispirare dalle nostre creazioni esclusive per tagli, colori e acconciature sposa." />
+            </Helmet>
             <div className="container mx-auto px-6">
                 <h1 className="section-title mb-16 animate-fade-in">Le Nostre Collezioni</h1>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -823,6 +832,10 @@ const LocationsPage = () => {
 
     return (
         <main ref={containerRef} className="pt-48 pb-32 bg-cream min-h-screen">
+            <Helmet>
+                <title>Sedi e Contatti | I Barberini Roma</title>
+                <meta name="description" content="Trova i saloni I Barberini a Roma. Scopri orari, indirizzi e contatti delle nostre tre sedi: Monteverde Hair Studio, Monteverde Beauty Center e Tuscolana." />
+            </Helmet>
             <div className="container mx-auto px-6 max-w-7xl">
                 <div className="text-center mb-24 max-w-3xl mx-auto header-reveal">
                     <h1 className="font-serif text-5xl md:text-7xl text-charcoal mb-6 leading-tight">Le Nostre Sedi</h1>
@@ -1242,6 +1255,11 @@ const BeautyCenterPage = () => {
 
     return (
         <main ref={mainRef} className="bg-cream min-h-screen">
+            <Helmet>
+                <title>Beauty Center & SPA Monteverde | I Barberini</title>
+                <meta name="description" content="Scopri il Beauty Center I Barberini a Roma Monteverde. Trattamenti viso e corpo, massaggi, nail art, laminazione ciglia e molto altro in un'oasi di puro benessere." />
+            </Helmet>
+
             {/* HERO SECTION */}
             <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
@@ -1569,6 +1587,11 @@ const CollectionDetailPage = () => {
 
     return (
         <main ref={mainRef} className="bg-cream min-h-screen pt-48 pb-24">
+            <Helmet>
+                <title>{collection.title} - Collezioni | I Barberini</title>
+                <meta name="description" content={`Scopri i dettagli della collezione fotografica: ${collection.title}. ${collection.desc}`} />
+            </Helmet>
+
             {/* HERO DEL DECENNIO */}
             <section className="hero-section relative h-[60vh] md:h-[70vh] w-full mb-24 overflow-hidden rounded-b-[3rem] mx-auto max-w-[98%]">
                 <div className="absolute inset-0 bg-charcoal/50 z-10" />
