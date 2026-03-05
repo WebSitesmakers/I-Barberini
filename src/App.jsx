@@ -676,9 +676,9 @@ const HomePage = () => {
             </Helmet>
             <Hero />
             <ValueSection />
-            <KeratinSection />
             <ChiSiamoSection />
             <Philosophy />
+            <KeratinSection />
             <section className="py-24 bg-cream reveal-up">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="section-title mb-8">Quarant'anni di Stile</h2>
