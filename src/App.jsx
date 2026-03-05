@@ -9,40 +9,40 @@ import {
     Facebook, ArrowRight, Camera, Star, Calendar, ChevronDown, Mail
 } from 'lucide-react';
 import logo from './assets/logo.png';
-import heroImg from './assets/HERO.jpg';
+import heroImg from './assets/HERO.webp';
 
 // Import Ambienti Images
-import amb1 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-06995.jpg';
-import amb2 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.jpg';
-import amb3 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07024.jpg';
-import amb4 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0600.JPG';
+import amb1 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.webp';
+import amb2 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.webp';
+import amb3 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07024.webp';
+import amb4 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0600.webp';
 
 // Import Beauty Images
-import beautyHero from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/centro-benessere-i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45.jpg';
-import beautyBed from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45-lettino-massaggi.jpg';
-import beautySauna from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/i-barberiniBeautySauna1.jpg';
-import beautyTreat1 from './assets/BEAUTY CENTER/TRATTAMENTI CORPO/IBARBERINIBEAUTY(1).jpg';
-import beautyTreat2 from './assets/BEAUTY CENTER/TRATTAMENTI CORPO/IBARBERINIBEAUTY3.jpg';
+import beautyHero from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/centro-benessere-i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45.webp';
+import beautyBed from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45-lettino-massaggi.webp';
+import beautySauna from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/i-barberiniBeautySauna1.webp';
+import beautyTreat1 from './assets/BEAUTY CENTER/TRATTAMENTI CORPO/IBARBERINIBEAUTY(1).webp';
+import beautyTreat2 from './assets/BEAUTY CENTER/TRATTAMENTI CORPO/IBARBERINIBEAUTY3.webp';
 
 // Import Specific Treatment Images
-import treatDermaplaning from './assets/BEAUTY CENTER/DERMAPLANING/I BARBERINI DERMAPLANING.jpg';
-import treatLaminazione from './assets/BEAUTY CENTER/LAMINAZIONE CIGLIA/I BARBERINI Laminazione.jpg';
-import treatLaser from './assets/BEAUTY CENTER/LASER  DIODO/epilazione-laser.jpg';
-import treatMakeUp from './assets/BEAUTY CENTER/MAKE-UP/VISO I BARBERINI 7.JPG.jpg';
-import treatMicroblading from './assets/BEAUTY CENTER/MICROBLADING/MICROBLADING I BARBERINI 1.JPG..jpeg';
-import treatNails from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 10.jpg';
-import treatPermanentMakeup from './assets/BEAUTY CENTER/PERMANENT MAKE UP/permanent-makeup.jpg';
-import treatPressoterapia from './assets/BEAUTY CENTER/PRESSOTERAPIA/pressoterapia1.jpg';
-import treatRadiofrequenza from './assets/BEAUTY CENTER/TRATTAMENTO VISO/Radiofrequenza-viso.jpg';
-import treatXtremeLashes from './assets/BEAUTY CENTER/XTREME LASHES/x-treme-lashes02.jpg';
+import treatDermaplaning from './assets/BEAUTY CENTER/DERMAPLANING/I BARBERINI DERMAPLANING.webp';
+import treatLaminazione from './assets/BEAUTY CENTER/LAMINAZIONE CIGLIA/I BARBERINI Laminazione.webp';
+import treatLaser from './assets/BEAUTY CENTER/LASER  DIODO/epilazione-laser.webp';
+import treatMakeUp from './assets/BEAUTY CENTER/MAKE-UP/VISO I BARBERINI 7.JPG.webp';
+import treatMicroblading from './assets/BEAUTY CENTER/MICROBLADING/MICROBLADING I BARBERINI 1.JPG..webp';
+import treatNails from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 10.webp';
+import treatPermanentMakeup from './assets/BEAUTY CENTER/PERMANENT MAKE UP/permanent-makeup.webp';
+import treatPressoterapia from './assets/BEAUTY CENTER/PRESSOTERAPIA/pressoterapia1.webp';
+import treatRadiofrequenza from './assets/BEAUTY CENTER/TRATTAMENTO VISO/Radiofrequenza-viso.webp';
+import treatXtremeLashes from './assets/BEAUTY CENTER/XTREME LASHES/x-treme-lashes02.webp';
 
 // Import Nails Section Images
-import nailsImg1 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 14.jpg';
-import nailsImg2 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 15.jpg';
-import nailsImg3 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 18.jpg';
+import nailsImg1 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 14.webp';
+import nailsImg2 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 15.webp';
+import nailsImg3 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 18.webp';
 
 // Chi Siamo Image
-import doriano1985 from './assets/Collezioni/Anni 90/Doriano 1985.jpg';
+import doriano1985 from './assets/Collezioni/Anni 90/Doriano 1985.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -691,7 +691,7 @@ const CollectionsPage = () => {
 };
 
 // Import specific Tuscolana image requested by user
-import ambTuscolana from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0591.JPG';
+import ambTuscolana from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0591.webp';
 
 const SEDI_DATA = [
     {
