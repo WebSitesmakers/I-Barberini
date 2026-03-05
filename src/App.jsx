@@ -772,7 +772,7 @@ const SEDI_DATA = [
         whatsapp: "366 4353196",
         email: "dorianocese@ibarberini.it",
         instagram: "ibarberinihairstudio",
-        facebook: "I Barberini Hair & Beauty",
+        facebook: "https://www.facebook.com/profile.php?id=100046379395958",
         mapIframe: "https://maps.google.com/maps?q=I%20Barberini%20Hair%20Studio&ll=41.8761165,12.4478398&z=17&output=embed"
     },
     {
@@ -785,7 +785,7 @@ const SEDI_DATA = [
         whatsapp: "333 8449866",
         email: "Sabrinaangelilli@ibarberini.it",
         instagram: "ibarberini_beautyerelax",
-        facebook: "I Barberini Beauty & Relax",
+        facebook: "https://www.facebook.com/www.ibarberini.it",
         mapIframe: "https://maps.google.com/maps?q=I%20Barberini%20Beauty%20%26%20Relax&ll=41.8763005,12.4481053&z=17&output=embed"
     },
     {
@@ -798,7 +798,7 @@ const SEDI_DATA = [
         whatsapp: null,
         email: "nadiamancini@ibarberini.it",
         instagram: "ibarberinidinadiamancini",
-        facebook: "hairstudio I Barberini di Nadia Mancini",
+        facebook: "https://www.facebook.com/profile.php?id=100063465013436",
         mapIframe: "https://maps.google.com/maps?q=I%20Barberini&ll=41.8755609,12.5246743&z=17&output=embed"
     }
 ];
