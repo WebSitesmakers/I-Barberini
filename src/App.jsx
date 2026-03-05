@@ -13,7 +13,7 @@ import logo from './assets/logo.png';
 import heroImg from './assets/HERO.webp';
 
 // Import Ambienti Images
-import amb1 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.webp';
+import amb1 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/WhatsApp Image 2026-03-02 at 18.35.22.webp';
 import amb2 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.webp';
 import amb3 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07024.webp';
 import amb4 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0600.webp';
@@ -252,7 +252,7 @@ const Hero = () => {
                     I Barberini
                 </h1>
                 <p className="font-sans text-xl md:text-2xl text-white/95 mb-10 max-w-2xl mx-auto italic drop-shadow-lg">
-                    L'arte dell'immagine a Roma, nel cuore di Monteverde, dal 1990.
+                    L'arte dell'immagine a Roma, nel cuore di Monteverde, dal 1987.
                 </p>
                 <div className="flex flex-col md:flex-row gap-4 justify-center">
                     <Link to="/collezioni" className="btn-primary">SCOPRI LE COLLEZIONI</Link>
@@ -291,7 +291,7 @@ const ValueSection = () => {
                         <Clock className="text-gold" size={40} />
                         <h3 className="font-serif text-2xl uppercase">Esperienza</h3>
                         <p className="text-charcoal/70 leading-relaxed font-sans">
-                            Oltre trent'anni di storia dedicati alla bellezza. Dal 1990 siamo il punto di riferimento per chi cerca stile e professionalità a Roma.
+                            Oltre quarant'anni di storia dedicati alla bellezza. Dal 1987 siamo il punto di riferimento per chi cerca stile e professionalità a Roma.
                         </p>
                     </div>
                     <div className="flex flex-col gap-4 p-8 glass-card">
@@ -334,7 +334,7 @@ const Philosophy = () => {
         return () => ctx.revert();
     }, []);
 
-    const text = "La maggior parte dei saloni punta sulla quantità. Noi puntiamo sulla qualità, relazione e continuità.";
+    const text = "La maggior parte dei saloni punta sulla quantità. Noi ricerchiamo qualità, relazione e continuità.";
 
     return (
         <section ref={sectionRef} className="py-32 bg-charcoal text-white overflow-hidden">
@@ -517,7 +517,7 @@ const ChiSiamoSection = () => {
                         <img 
                             src={doriano1985} 
                             alt="Doriano 1985 - La Storia de I Barberini" 
-                            className="w-full h-full object-cover greyscale sepia-[0.3]"
+                            className="w-full h-full object-cover grayscale sepia-[0.3]"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent mix-blend-multiply"></div>
                     </div>
@@ -676,7 +676,7 @@ const HomePage = () => {
             <Philosophy />
             <section className="py-24 bg-cream reveal-up">
                 <div className="container mx-auto px-6 text-center">
-                    <h2 className="section-title mb-8">Trent'anni di Stile</h2>
+                    <h2 className="section-title mb-8">Quarant'anni di Stile</h2>
                     <p className="text-charcoal/70 mb-12 max-w-xl mx-auto">
                         Dagli anni 90 ad oggi, abbiamo attraversato ere e tendenze, mantenendo sempre fede alla nostra visione di eleganza.
                     </p>
@@ -756,7 +756,7 @@ const SEDI_DATA = [
     {
         id: "monteverde-hair",
         title: "Monteverde Hair Studio",
-        image: amb2,
+        image: amb3,
         address: "Via F. Ozanam, 33 - 00152 Roma",
         hours: "08:00 - 19:30 (Chiuso Domenica)",
         phones: ["06 58200120", "06 58200558"],
@@ -1125,7 +1125,7 @@ const TreatmentDetailsOverlay = ({ isOpen, onClose, title, content }) => {
                     ))}
                 </div>
                 <div className="p-8 border-t border-gold/10 text-center bg-cream/30">
-                    <p className="font-serif italic text-charcoal/60">I Barberini — Eccellenza e Cura dal 1990</p>
+                    <p className="font-serif italic text-charcoal/60">I Barberini — Eccellenza e Cura dal 1987</p>
                 </div>
             </div>
         </div>
@@ -1462,7 +1462,7 @@ const Footer = () => {
                             <img src={logo} alt="I Barberini" className="h-16 w-auto object-contain brightness-0 invert" />
                         </Link>
                         <p className="text-white/50 max-w-sm mb-8 leading-relaxed">
-                            Dal 1990, custodi della bellezza a Roma. Tradizione, innovazione e passione per l'immagine.
+                            Dal 1987, custodi della bellezza a Roma. Tradizione, innovazione e passione per l'immagine.
                         </p>
                         <Link to="/sedi" className="inline-block px-8 py-3 border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-300 font-sans tracking-widest text-xs uppercase mb-8">
                             Scopri la sede più vicina
