@@ -38,7 +38,7 @@ import treatRadiofrequenza from './assets/BEAUTY CENTER/TRATTAMENTO VISO/Radiofr
 import treatXtremeLashes from './assets/BEAUTY CENTER/XTREME LASHES/x-treme-lashes02.webp';
 
 // Import Nails Section Images
-import nailsImg1 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 14.webp';
+import nailsImg1 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 3.webp';
 import nailsImg2 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 15.webp';
 import nailsImg3 from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 18.webp';
 
@@ -517,7 +517,7 @@ const ChiSiamoSection = () => {
                         <img 
                             src={doriano1985} 
                             alt="Doriano 1985 - La Storia de I Barberini" 
-                            className="w-full h-full object-cover grayscale sepia-[0.3]"
+                            className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent mix-blend-multiply"></div>
                     </div>
@@ -1495,14 +1495,14 @@ const Footer = () => {
                         </form>
                     </div>
 
-                    {/* Info Column */}
+                    {/* Sitemap Column */}
                     <div>
-                        <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Info</h4>
+                        <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Sitemap</h4>
                         <ul className="space-y-4 text-white/70">
-                            <li><Link to="/sedi" className="hover:text-gold transition-colors">Dove Siamo</Link></li>
-                            <li><Link to="/beauty-center" className="hover:text-gold transition-colors">Servizi Estetici</Link></li>
-                            <li><Link to="/collezioni" className="hover:text-gold transition-colors">Galleria</Link></li>
-                            <li><a href="#" className="hover:text-gold transition-colors">Privacy Policy</a></li>
+                            <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
+                            <li><Link to="/sedi" className="hover:text-gold transition-colors">Le Nostre Sedi</Link></li>
+                            <li><Link to="/beauty-center" className="hover:text-gold transition-colors">Beauty Center</Link></li>
+                            <li><Link to="/collezioni" className="hover:text-gold transition-colors">Collezioni</Link></li>
                         </ul>
                     </div>
 
