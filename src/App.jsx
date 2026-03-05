@@ -1485,10 +1485,6 @@ const Footer = () => {
                         <Link to="/sedi" className="inline-block px-8 py-3 border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-300 font-sans tracking-widest text-xs uppercase mb-8">
                             Scopri la sede più vicina
                         </Link>
-                        <div className="flex gap-6">
-                            <a href="https://www.instagram.com/ibarberinihairstudio" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><Instagram /></a>
-                            <a href="#" className="hover:text-gold transition-colors"><Facebook /></a>
-                        </div>
                     </div>
 
                     {/* Newsletter Column */}
