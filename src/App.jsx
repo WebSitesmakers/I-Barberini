@@ -1112,8 +1112,8 @@ const TreatmentDetailsOverlay = ({ isOpen, onClose, title, content }) => {
                 className="absolute inset-0 bg-charcoal/40 backdrop-blur-md"
                 onClick={onClose}
             />
-            <div className="bg-white rounded-[2rem] w-full max-w-4xl max-h-[90vh] overflow-hidden relative shadow-2xl flex flex-col">
-                <div className="p-8 border-b border-gold/10 flex justify-between items-center bg-white sticky top-0 z-10">
+            <div className="bg-white rounded-[2rem] w-full max-w-4xl max-h-[85dvh] overflow-hidden relative shadow-2xl flex flex-col">
+                <div className="p-8 border-b border-gold/10 flex justify-between items-start bg-white shrink-0 z-10">
                     <div>
                         <span className="text-gold font-sans tracking-widest uppercase text-xs mb-2 block">Dettagli Trattamento</span>
                         <h2 className="text-3xl font-serif text-charcoal">{title}</h2>
@@ -1125,7 +1125,7 @@ const TreatmentDetailsOverlay = ({ isOpen, onClose, title, content }) => {
                         <X className="w-8 h-8 text-charcoal group-hover:rotate-90 transition-transform duration-300" />
                     </button>
                 </div>
-                <div className="p-8 md:p-12 overflow-y-auto font-sans leading-relaxed text-charcoal/80 space-y-6">
+                <div className="p-8 md:p-12 overflow-y-auto font-sans leading-relaxed text-charcoal/80 space-y-6 flex-1">
                     {content.split('\n\n').map((paragraph, idx) => (
                         <p key={idx} className="text-lg">
                             {paragraph.split('\n').map((line, lIdx) => (
@@ -1137,7 +1137,7 @@ const TreatmentDetailsOverlay = ({ isOpen, onClose, title, content }) => {
                         </p>
                     ))}
                 </div>
-                <div className="p-8 border-t border-gold/10 text-center bg-cream/30">
+                <div className="p-8 border-t border-gold/10 text-center bg-cream/30 shrink-0">
                     <p className="font-serif italic text-charcoal/60">I Barberini — Eccellenza e Cura dal 1987</p>
                 </div>
             </div>
