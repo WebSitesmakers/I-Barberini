@@ -96,7 +96,7 @@ const importAllImages = (globResult) => {
 const images90s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 90/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const images00s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2000/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const images10s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2010/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
-const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG,webp, mp4}', { eager: true }));
 const imagesSpose = importAllImages(import.meta.glob('./assets/Collezioni/LE SPOSE/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 
 // Dynamic Imports for Beauty Treatments
