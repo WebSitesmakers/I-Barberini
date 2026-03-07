@@ -8,7 +8,7 @@ import {
     Menu, X, Scissors, Heart, MapPin,
     Sparkles, Clock, Phone, Instagram,
     Facebook, ArrowRight, Camera, Star, Calendar, ChevronDown, Mail,
-    ArrowLeft
+    ArrowLeft, Play
 } from 'lucide-react';
 import logo from './assets/logo.png';
 import heroImg from './assets/HERO.webp';
@@ -96,7 +96,7 @@ const importAllImages = (globResult) => {
 const images90s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 90/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const images00s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2000/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const images10s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2010/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
-const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG,webp, mp4}', { eager: true }));
+const images20s = importAllImages(import.meta.glob('./assets/Collezioni/Anni 2020/*.{png,jpg,jpeg,JPG,JPEG,webp,mp4}', { eager: true }));
 const imagesSpose = importAllImages(import.meta.glob('./assets/Collezioni/LE SPOSE/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 
 // Dynamic Imports for Beauty Treatments
@@ -1178,11 +1178,19 @@ const Lightbox = ({ images, currentIndex, isOpen, onClose, onPrev, onNext }) => 
                 )}
 
                 <div className="w-full max-w-5xl aspect-video flex items-center justify-center">
-                    <img 
-                        src={images[currentIndex]} 
-                        alt={`Gallery item ${currentIndex + 1}`}
-                        className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
-                    />
+                    {images[currentIndex].toLowerCase().endsWith('.mp4') ? (
+                        <video
+                            src={images[currentIndex]}
+                            className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
+                            controls autoPlay playsInline
+                        />
+                    ) : (
+                        <img 
+                            src={images[currentIndex]} 
+                            alt={`Gallery item ${currentIndex + 1}`}
+                            className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
+                        />
+                    )}
                 </div>
             </div>
 
@@ -1195,7 +1203,11 @@ const Lightbox = ({ images, currentIndex, isOpen, onClose, onPrev, onNext }) => 
                             idx === currentIndex ? 'ring-2 ring-gold scale-110' : 'opacity-40 hover:opacity-100'
                         }`}
                     >
-                        <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                        {img.toLowerCase().endsWith('.mp4') ? (
+                             <video src={img} className="w-full h-full object-cover" />
+                        ) : (
+                             <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                        )}
                     </button>
                 ))}
             </div>
@@ -1621,21 +1633,34 @@ const CollectionDetailPage = () => {
                 </div>
 
                 <div className="gallery-grid columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                    {collection.images && collection.images.map((imgSrc, idx) => (
-                        <div
-                            key={idx}
-                            className="gallery-item break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer"
-                            onClick={() => setLightboxImage(imgSrc)}
-                        >
-                            <img
-                                src={imgSrc}
-                                alt={`${collection.title} stile ${idx}`}
-                                className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
-                        </div>
-                    ))}
+                    {collection.images && collection.images.map((imgSrc, idx) => {
+                        const isVideo = imgSrc.toLowerCase().endsWith('.mp4');
+                        return (
+                            <div
+                                key={idx}
+                                className="gallery-item break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer"
+                                onClick={() => setLightboxImage(imgSrc)}
+                            >
+                                {isVideo ? (
+                                    <video
+                                        src={imgSrc}
+                                        className="w-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                                        autoPlay loop muted playsInline
+                                    />
+                                ) : (
+                                    <img
+                                        src={imgSrc}
+                                        alt={`${collection.title} stile ${idx}`}
+                                        className="w-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                                        loading="lazy"
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                    {isVideo && <Play className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity" />}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </section>
 
@@ -1648,11 +1673,19 @@ const CollectionDetailPage = () => {
                     >
                         <X size={40} />
                     </button>
-                    <img
-                        src={lightboxImage}
-                        alt="Zoomed"
-                        className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
-                    />
+                    {lightboxImage.toLowerCase().endsWith('.mp4') ? (
+                        <video
+                            src={lightboxImage}
+                            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+                            controls autoPlay playsInline
+                        />
+                    ) : (
+                        <img
+                            src={lightboxImage}
+                            alt="Zoomed"
+                            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+                        />
+                    )}
                 </div>
             )}
         </main>
