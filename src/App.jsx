@@ -1536,6 +1536,7 @@ const Footer = () => {
 
                 <div className="flex flex-col justify-center items-center pt-12 border-t border-white/10 text-white/30 text-sm gap-4">
                     <p>© {new Date().getFullYear()} I Barberini. Tutti i diritti riservati.</p>
+                    <a href="https://www.iubenda.com/privacy-policy/98656024" className="iubenda-white iubenda-noiframe iubenda-embed hover:text-white transition-colors" title="Privacy Policy">Privacy Policy</a>
                 </div>
             </div>
         </footer>
