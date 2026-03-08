@@ -671,8 +671,8 @@ const HomePage = () => {
     return (
         <main ref={mainRef}>
             <Helmet>
-                <title>I Barberini Roma | Saloni di Bellezza e Beauty Center</title>
-                <meta name="description" content="I Barberini Roma: Maison di Bellezza dal 1987. Saloni multisede, Beauty Center d'eccellenza, cura dell'immagine per capelli e corpo, specializzati in spose." />
+                <title>I Barberini | L'arte dell'immagine a Roma</title>
+                <meta name="description" content="I Barberini: Maison di Bellezza a Roma dal 1987. Saloni multisede, Beauty Center d'eccellenza, cura dell'immagine per capelli e corpo, specializzati in spose." />
             </Helmet>
             <Hero />
             <ValueSection />
