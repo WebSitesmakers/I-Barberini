@@ -1877,6 +1877,7 @@ const App = () => {
                     <Route path="/collezioni" element={<CollectionsPage />} />
                     <Route path="/sedi" element={<LocationsPage />} />
                     <Route path="/beauty-center" element={<BeautyCenterPage />} />
+                    <Route path="/consigli" element={<ConsigliPage />} />
                     <Route path="/collezioni/:id" element={<CollectionDetailPage />} />
                 </Routes>
                 <Footer />
