@@ -49,6 +49,8 @@ import doriano1985 from './assets/Collezioni/Anni 90/Doriano 1985.webp';
 // Keratin Section
 import keratinaPdf from './assets/KERATINA.pdf';
 import keratinaImg from './assets/Collezioni/Anni 2020/I BARBERINI 35 2022.webp';
+import consigliHair from './assets/I Nostri Consigli/FOTO APERTURA RICOSTRUZIONE kAPILLARE.jpg';
+import consigliBlond from './assets/I Nostri Consigli/Foto x il Testo bionde.jpg';
 
 import { treatmentsContent } from './data/treatmentsContent';
 
@@ -181,9 +183,10 @@ const Navbar = () => {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'text-charcoal after:w-full' : ''}`}>Home</Link>
                         <Link to="/collezioni" className={`nav-link ${location.pathname.startsWith('/collezioni') ? 'text-charcoal after:w-full' : ''}`}>Collezioni</Link>
-                        <Link to="/sedi" className={`nav-link ${location.pathname === '/sedi' ? 'text-charcoal after:w-full' : ''}`}>Sedi</Link>
                         <Link to="/beauty-center" className={`nav-link ${location.pathname === '/beauty-center' ? 'text-charcoal after:w-full' : ''}`}>Beauty Center</Link>
-                        <Link to="/sedi" className="btn-primary py-2 px-6 text-xs tracking-[0.2em] font-bold text-center">PRENOTA</Link>
+                        <Link to="/consigli" className={`nav-link ${location.pathname === '/consigli' ? 'text-charcoal after:w-full' : ''}`}>I nostri consigli</Link>
+                        <Link to="/sedi" className={`nav-link ${location.pathname === '/sedi' ? 'text-charcoal after:w-full' : ''}`}>Sedi</Link>
+                        <Link to="/sedi" className="btn-primary py-2 px-6 text-xs tracking-[0.2em] font-bold text-center">PRENOTA ORA</Link>
                     </div>
 
                     <button className="md:hidden text-charcoal p-2 hover:bg-charcoal/5 rounded-full transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -200,6 +203,7 @@ const Navbar = () => {
                 <Link to="/collezioni" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname.startsWith('/collezioni') ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Collezioni</Link>
                 <Link to="/sedi" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname === '/sedi' ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Sedi</Link>
                 <Link to="/beauty-center" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname === '/beauty-center' ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>Beauty Center</Link>
+                <Link to="/consigli" className={`text-2xl font-serif relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 ${location.pathname === '/consigli' ? 'text-gold after:w-full' : 'text-charcoal hover:text-gold after:w-0 hover:after:w-full'}`} onClick={() => setIsMenuOpen(false)}>I nostri consigli</Link>
                 <Link to="/sedi" className="btn-primary mt-8 scale-125 text-center" onClick={() => setIsMenuOpen(false)}>PRENOTA ORA</Link>
                 <button className="absolute top-10 right-10 p-3 hover:bg-charcoal/5 rounded-full" onClick={() => setIsMenuOpen(false)}><X size={32} /></button>
             </div>
@@ -255,9 +259,26 @@ const Hero = () => {
                 <p className="font-sans text-xl md:text-2xl text-white/95 mb-10 max-w-2xl mx-auto italic drop-shadow-lg">
                     L' arte e l'eleganza dell'immagine a Roma, nel cuore di Roma, dal 1987.
                 </p>
-                <div className="flex flex-col md:flex-row gap-4 justify-center">
+                <div className="flex flex-col md:flex-row gap-4 justify-center mb-16">
                     <Link to="/collezioni" className="btn-primary">SCOPRI LE COLLEZIONI</Link>
                     <Link to="/sedi" className="btn-secondary bg-white/10 backdrop-blur-sm text-white border-white/30 text-center flex items-center justify-center">PRENOTA ORA</Link>
+                </div>
+                
+                {/* Value Section integrata nella Hero */}
+                {/* Value Section integrata nella Hero */}
+                <div className="grid md:grid-cols-3 gap-6 text-left border border-white/10 mt-12 bg-charcoal/70 p-6 md:p-8 rounded-[2rem] backdrop-blur-xl shadow-2xl relative z-20">
+                    <div className="flex flex-col gap-2">
+                        <h3 className="font-serif text-xl md:text-2xl uppercase text-gold flex items-center gap-3"><Clock size={24}/> Esperienza</h3>
+                        <p className="text-white/95 font-sans text-sm md:text-base leading-relaxed font-light">Dal 1987 il punto di riferimento a Roma.</p>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <h3 className="font-serif text-xl md:text-2xl uppercase text-gold flex items-center gap-3"><Scissors size={24}/> Talento</h3>
+                        <p className="text-white/95 font-sans text-sm md:text-base leading-relaxed font-light">Progetti stilistici che valorizzano la tua personalità.</p>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <h3 className="font-serif text-xl md:text-2xl uppercase text-gold flex items-center gap-3"><Heart size={24}/> Spose</h3>
+                        <p className="text-white/95 font-sans text-sm md:text-base leading-relaxed font-light">Creazioni uniche per il giorno più importante.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -675,7 +696,7 @@ const HomePage = () => {
                 <meta name="description" content="I Barberini: Maison di Bellezza a Roma dal 1987. Saloni multisede, Beauty Center d'eccellenza, cura dell'immagine per capelli e corpo, specializzati in spose." />
             </Helmet>
             <Hero />
-            <ValueSection />
+            
             <ChiSiamoSection />
             <Philosophy />
             <KeratinSection />
@@ -777,13 +798,13 @@ const SEDI_DATA = [
     },
     {
         id: "monteverde-beauty",
-        title: "Monteverde Beauty Center",
+        title: "Beauty Center",
         image: beautyBed,
-        address: "Via F. Ozanam, 45 - 00152 Roma",
+        address: "Viale F. Camillo cap 00181",
         hours: "09:00 - 19:30 (Chiuso Domenica)",
         phones: ["06 58233871"],
-        whatsapp: "333 8449866",
-        email: "Sabrinaangelilli@ibarberini.it",
+        whatsapp: "334 2452083",
+        email: "sabrinaangelilli@ibarberini.it",
         instagram: "ibarberini_beautyerelax",
         facebook: "https://www.facebook.com/www.ibarberini.it",
         mapIframe: "https://maps.google.com/maps?q=I%20Barberini%20Beauty%20%26%20Relax&ll=41.8763005,12.4481053&z=17&output=embed"
@@ -907,7 +928,7 @@ const LocationsPage = () => {
                                         <a href={`https://instagram.com/${sede.instagram}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 hover:text-gold transition-colors">
                                             <Instagram size={20} className="text-charcoal" /> <span>@{sede.instagram}</span>
                                         </a>
-                                        <a href={`https://facebook.com/${sede.facebook}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 hover:text-gold transition-colors">
+                                        <a href={`${sede.facebook}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 hover:text-gold transition-colors">
                                             <Facebook size={20} className="text-charcoal" /> <span>{sede.facebook}</span>
                                         </a>
                                     </div>
@@ -998,14 +1019,55 @@ const BEAUTY_TREATMENTS = [
         images: treatPressoterapiaImgs,
         extendedText: treatmentsContent["PRESSOTERAPIA"]
     },
-    {
+        {
         id: "radiofrequenza",
-        title: "Radiofrequenza Viso/Corpo",
+        title: "Radiofrequenza",
         intro: "Lifting non chirurgico che stimola nuovo collagene.",
         desc: "Una tecnica innovativa che sfrutta onde radio per sviluppare calore controllato nel derma profondo. Ottimo per trattare le rughe d'espressione, la lassità cutanea e le smagliature, rendendo la pelle notevolmente più elastica, liscia, luminosa e compatta.",
         image: treatRadiofrequenza,
         images: treatRadiofrequenzaImgs,
         extendedText: treatmentsContent["TRATTAMENTO VISO"]
+    },
+    {
+        id: "xtreme",
+        title: "Xtreme Lashes®",
+        intro: "L'eccellenza globale nell'estensione ciglia.",
+        desc: "Allunga e infoltisce le tue ciglia in modo estremamente naturale con fibre sintetiche leggerissime, applicate una ad una. Resistenti all'acqua e al sudore, permettono di dire addio al mascara restando impeccabili per mesi (con ricariche periodiche mensili).",
+        image: treatXtremeLashes,
+        images: treatXtremeLashesImgs,
+        extendedText: treatmentsContent["XTREME LASHES"]
+    },
+    {
+        id: "ossigenoterapia",
+        title: "Ossigenoterapia",
+        intro: "Ossigeno puro e principi attivi per il derma.",
+        desc: "Un trattamento non invasivo che veicola ossigeno puro e principi attivi (acido ialuronico, vitamine) nel derma. Stimola la produzione di Collagene ed Elastina, migliorando la luminosità, idratando in profondità e riducendo rughe, macchie e acne.",
+        image: treatDermaplaning,
+        extendedText: treatmentsContent["OSSIGENOTERAPIA"]
+    },
+    {
+        id: "solarium",
+        title: "Solarium",
+        intro: "Per un'abbronzatura sana e controllata.",
+        desc: "Un'abbronzatura perfetta e duratura con macchinari all'avanguardia. Scopri i nostri consigli per mantenere la pelle protetta ed evitare segni del tempo.",
+        image: treatDermaplaning,
+        extendedText: treatmentsContent["SOLARIUM"]
+    },
+    {
+        id: "trattamenti-viso",
+        title: "Trattamenti Viso",
+        intro: "Cura specifica e mirata per l'idratazione e ringiovanimento testuale.",
+        desc: "Detersione accurata e rituali studiati ad hoc per ravvivare e dare luce al viso.",
+        image: treatDermaplaning,
+        extendedText: treatmentsContent["TRATTAMENTI VISO"]
+    },
+    {
+        id: "trattamenti-corpo",
+        title: "Trattamenti Corpo",
+        intro: "Percorsi benessere per rigenerare completamente la pelle e i tessuti.",
+        desc: "Sinergia di tecniche estetiche per massimizzare il drenaggio, l'elasticità e l'idratazione corporea.",
+        image: treatDermaplaning,
+        extendedText: treatmentsContent["TRATTAMENTI CORPO"]
     },
     {
         id: "xtreme",
@@ -1694,6 +1756,79 @@ const CollectionDetailPage = () => {
 };
 
 // --- App ---
+
+
+const ConsigliPage = () => {
+    const mainRef = useRef(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        const ctx = gsap.context(() => {
+            gsap.from(".consigli-anim", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+        }, mainRef);
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <main ref={mainRef} className="pt-48 pb-32 bg-cream min-h-screen">
+            <Helmet>
+                <title>I Nostri Consigli | I Barberini</title>
+                <meta name="description" content="Consigli su capelli, ricostruzione, colori e look. Da quarant'anni ci prendiamo cura dei tuoi capelli." />
+            </Helmet>
+            <div className="container mx-auto px-6 max-w-5xl">
+                <div className="text-center mb-24 consigli-anim">
+                    <span className="text-gold font-sans tracking-[0.3em] uppercase mb-4 block text-sm">Esperienza e Cura</span>
+                    <h1 className="font-serif text-5xl md:text-7xl text-charcoal mb-6 leading-tight">I Nostri Consigli</h1>
+                    <p className="font-serif text-2xl text-charcoal/80 italic">da quarant'anni ci prendiamo cura dei tuoi capelli</p>
+                </div>
+
+                <div className="space-y-32">
+                    {/* Ricostruzione Kapillare */}
+                    <div className="flex flex-col md:flex-row gap-12 items-center consigli-anim">
+                        <div className="w-full md:w-1/2 rounded-[2rem] overflow-hidden shadow-2xl">
+                            <img src={consigliHair} alt="Riposizione Kapillare" className="w-full h-[500px] object-cover" />
+                        </div>
+                        <div className="w-full md:w-1/2 space-y-6">
+                            <h2 className="font-serif text-4xl text-charcoal">Trattamento di Ricostruzione Kapillare</h2>
+                            <p className="font-sans text-lg text-charcoal/70 leading-relaxed">
+                                Il trattamento di Ricostruzione Capillare, a base di cheratina, è un trattamento innovativo per la Cura e la Bellezza dei Capelli. Non solo lascia i capelli Setosi, Lucidi e Dritti, ma offre anche sollievo dalla ingestibilità dei capelli crespi.
+                            </p>
+                            <h3 className="font-serif text-2xl text-gold mt-6">I Prodotti per la cura domiciliare</h3>
+                            <ul className="space-y-4 font-sans text-charcoal/80">
+                                <li><strong>Keratin Shampoo 400ml:</strong> A base di Cheratina, formulato per il lavaggio dei capelli trattati. Indispensabile per proteggere i capelli.</li>
+                                <li><strong>Keratin Conditioner 400ml:</strong> Con nutrienti specifici, oli e proteine. Nutre i capelli e li protegge dal calore e agenti atmosferici.</li>
+                                <li><strong>Vanilla Deep Ristrutturante 207ml:</strong> Crema rivitalizzante per lunghezze e punte. Altamente ristrutturante, dona brillantezza unica.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Blond Me */}
+                    <div className="flex flex-col md:flex-row-reverse gap-12 items-center consigli-anim">
+                        <div className="w-full md:w-1/2 rounded-[2rem] overflow-hidden shadow-2xl">
+                            <img src={consigliBlond} alt="Le Bionde" className="w-full h-[500px] object-cover" />
+                        </div>
+                        <div className="w-full md:w-1/2 space-y-6">
+                            <h2 className="font-serif text-4xl text-charcoal">Le Bionde - Blondme</h2>
+                            <p className="font-sans text-lg text-charcoal/70 leading-relaxed">
+                                Le bionde si aspettano un colore perfetto e personalizzato per un risultato unico. Troppo spesso le basi irregolari, la delicata struttura dei capelli e i danneggiamenti precedenti sono solo alcune delle sfide che si incontrano.
+                            </p>
+                            <p className="font-sans text-lg text-charcoal/80 font-medium">
+                                BLONDME, ora arricchito con Advanced Bonding System, è l'unico brand colour & care, interamente dedicato alle bionde.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
+};
+
 
 const App = () => {
     useEffect(() => {
