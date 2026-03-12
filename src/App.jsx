@@ -35,7 +35,7 @@ import treatMicroblading from './assets/BEAUTY CENTER/MICROBLADING/MICROBLADING 
 import treatNails from './assets/BEAUTY CENTER/NAILS/I BARBERINI NAILS 10.webp';
 import treatPermanentMakeup from './assets/BEAUTY CENTER/PERMANENT MAKE UP/permanent-makeup.webp';
 import treatPressoterapia from './assets/BEAUTY CENTER/PRESSOTERAPIA/pressoterapia1.webp';
-import treatRadiofrequenza from './assets/BEAUTY CENTER/TRATTAMENTO VISO/Radiofrequenza-viso.webp';
+import treatRadiofrequenza from './assets/BEAUTY CENTER/RADIOFREQUENZA/Radiofrequenza-viso.webp';
 import treatXtremeLashes from './assets/BEAUTY CENTER/XTREME LASHES/x-treme-lashes02.webp';
 
 // Import Nails Section Images
