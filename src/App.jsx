@@ -110,7 +110,8 @@ const treatMicrobladingImgs = importAllImages(import.meta.glob('./assets/BEAUTY 
 const treatNailsImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/NAILS/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const treatPermanentMakeupImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/PERMANENT MAKE UP/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const treatPressoterapiaImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/PRESSOTERAPIA/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
-const treatRadiofrequenzaImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/TRATTAMENTO VISO/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatRadiofrequenzaImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/RADIOFREQUENZA/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
+const treatVisoImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/TRATTAMENTO VISO/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const treatXtremeLashesImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/XTREME LASHES/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const treatSolariumImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/SOLARIUM/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
 const treatPedicureImgs = importAllImages(import.meta.glob('./assets/BEAUTY CENTER/PEDICURE/*.{png,jpg,jpeg,JPG,JPEG,webp}', { eager: true }));
@@ -800,7 +801,7 @@ const SEDI_DATA = [
         id: "monteverde-beauty",
         title: "Beauty Center",
         image: beautyBed,
-        address: "Viale F. Camillo cap 00181",
+        address: "Via F. Ozanam, 45 - 00152 Roma",
         hours: "09:00 - 19:30 (Chiuso Domenica)",
         phones: ["06 58233871"],
         whatsapp: "334 2452083",
@@ -813,7 +814,7 @@ const SEDI_DATA = [
         id: "tuscolano-hair",
         title: "Tuscolano Hair & Beauty",
         image: ambTuscolana,
-        address: "V.le F. Camillo 52b - 00152 Roma",
+        address: "V.le F. Camillo 52b - 00181 Roma",
         hours: "08:30 - 19:00 (Chiuso Domenica e Lunedì)",
         phones: ["06 7803519"],
         whatsapp: null,
@@ -1026,7 +1027,7 @@ const BEAUTY_TREATMENTS = [
         desc: "Una tecnica innovativa che sfrutta onde radio per sviluppare calore controllato nel derma profondo. Ottimo per trattare le rughe d'espressione, la lassità cutanea e le smagliature, rendendo la pelle notevolmente più elastica, liscia, luminosa e compatta.",
         image: treatRadiofrequenza,
         images: treatRadiofrequenzaImgs,
-        extendedText: treatmentsContent["TRATTAMENTO VISO"]
+        extendedText: treatmentsContent["RADIOFREQUENZA"]
     },
     {
         id: "xtreme",
@@ -1058,7 +1059,8 @@ const BEAUTY_TREATMENTS = [
         title: "Trattamenti Viso",
         intro: "Cura specifica e mirata per l'idratazione e ringiovanimento testuale.",
         desc: "Detersione accurata e rituali studiati ad hoc per ravvivare e dare luce al viso.",
-        image: treatDermaplaning,
+        image: treatVisoImgs[0] || treatDermaplaning,
+        images: treatVisoImgs,
         extendedText: treatmentsContent["TRATTAMENTI VISO"]
     },
     {
