@@ -241,7 +241,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section ref={heroRef} className="relative h-[100dvh] flex items-center justify-center overflow-hidden">
+        <section ref={heroRef} className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden pt-36 pb-12 md:p-0">
             <div className="absolute inset-0 z-0">
                 <img
                     ref={bgRef}
@@ -252,7 +252,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/20 to-cream" />
             </div>
 
-            <div className="container mx-auto px-6 relative z-10 text-center hero-content">
+            <div className="container mx-auto px-6 relative z-10 text-center hero-content mt-12 md:mt-0">
                 <h1 className="font-script text-7xl md:text-[10rem] text-white mb-6 tracking-normal drop-shadow-2xl">
                     I Barberini
                 </h1>
