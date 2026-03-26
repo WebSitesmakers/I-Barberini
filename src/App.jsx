@@ -52,7 +52,7 @@ import keratinaImg from './assets/Collezioni/Anni 2020/I BARBERINI 35 2022.webp'
 import consigliHair from './assets/I Nostri Consigli/FOTO APERTURA RICOSTRUZIONE kAPILLARE.webp';
 import consigliBlond from './assets/I Nostri Consigli/Foto x il Testo bionde.webp';
 
-import { treatmentsContent } from './data/treatmentsContent';
+import { treatmentsContent } from './data/treatmentsContent.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -905,7 +905,7 @@ const BEAUTY_TREATMENTS = [
         desc: "Il Laser a Diodo a Fibra ottica emette un fascio di luce a 810nm il cui bersaglio è la melanina del pelo, contenuta nel bulbo pilifero. La trasmissione tramite fibra ottica assicura maggiore efficacia. Adatto a tutti i fototipi, riduce progressivamente la crescita dei peli per risultati duraturi nel tempo.",
         image: treatLaser,
         images: treatLaserImgs,
-        extendedText: treatmentsContent["LASER  DIODO"]
+        extendedText: treatmentsContent["LASER DIODO"]
     },
     {
         id: "makeup",
@@ -1122,16 +1122,9 @@ const TreatmentDetailsOverlay = ({ isOpen, onClose, title, content }) => {
                     </button>
                 </div>
                 <div className="p-8 md:p-12 overflow-y-auto font-sans leading-relaxed text-charcoal/80 space-y-6 flex-1">
-                    {content.split('\n\n').map((paragraph, idx) => (
-                        <p key={idx} className="text-lg">
-                            {paragraph.split('\n').map((line, lIdx) => (
-                                <React.Fragment key={lIdx}>
-                                    {line}
-                                    {lIdx < paragraph.split('\n').length - 1 && <br />}
-                                </React.Fragment>
-                            ))}
-                        </p>
-                    ))}
+                    <div className="text-lg text-charcoal/80 treatments-content">
+                        {content}
+                    </div>
                 </div>
                 <div className="p-8 border-t border-gold/10 text-center bg-cream/30 shrink-0">
                     <p className="font-serif italic text-charcoal/60">I Barberini — Eccellenza e Cura dal 1987</p>
@@ -1501,7 +1494,11 @@ const Footer = () => {
                         <p className="text-white/70 mb-6 text-sm">
                             Iscriviti alla nostra newsletter per ricevere aggiornamenti su eventi, nuove collezioni e promozioni esclusive.
                         </p>
-                        <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+                        <form className="flex flex-col gap-4" onSubmit={(e) => {
+                            e.preventDefault();
+                            const email = e.target.querySelector('input').value;
+                            window.location.href = `mailto:info@ibarberini.it?subject=Iscrizione Newsletter&body=Richiesta iscrizione per: ${email}`;
+                        }}>
                             <input 
                                 type="email" 
                                 placeholder="La tua email" 
