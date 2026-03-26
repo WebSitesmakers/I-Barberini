@@ -49,8 +49,8 @@ import doriano1985 from './assets/Collezioni/Anni 90/Doriano 1985.webp';
 // Keratin Section
 import keratinaPdf from './assets/KERATINA.pdf';
 import keratinaImg from './assets/Collezioni/Anni 2020/I BARBERINI 35 2022.webp';
-import consigliHair from './assets/I Nostri Consigli/FOTO APERTURA RICOSTRUZIONE kAPILLARE.jpg';
-import consigliBlond from './assets/I Nostri Consigli/Foto x il Testo bionde.jpg';
+import consigliHair from './assets/I Nostri Consigli/FOTO APERTURA RICOSTRUZIONE kAPILLARE.webp';
+import consigliBlond from './assets/I Nostri Consigli/Foto x il Testo bionde.webp';
 
 import { treatmentsContent } from './data/treatmentsContent';
 
