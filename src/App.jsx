@@ -17,7 +17,7 @@ import heroImg from './assets/HERO.webp';
 import amb1 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/WhatsApp Image 2026-03-02 at 18.35.22.webp';
 import amb2 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07000.webp';
 import amb3 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/06 - I BARBERINI-07024.webp';
-import amb4 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0600.webp';
+import amb4 from './assets/AMBIENTI HAIR STUDIO-20260227T212318Z-1-001/AMBIENTI HAIR STUDIO/DSCN0593.webp';
 
 // Import Beauty Images
 import beautyHero from './assets/BEAUTY CENTER/AMBIENTE BEAUTY CENTER/centro-benessere-i-barberini-beauty-relax-estetica-roma-via-federico-ozanam-45.webp';
