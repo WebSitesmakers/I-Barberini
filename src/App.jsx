@@ -1745,13 +1745,6 @@ const ConsigliPage = () => {
                             >
                                 SCOPRI DI PIÙ
                             </a>
-
-                            <h3 className="font-serif text-2xl text-gold mt-10">I Prodotti per la cura domiciliare</h3>
-                            <ul className="space-y-4 font-sans text-charcoal/80">
-                                <li><strong>Keratin Shampoo 400ml:</strong> A base di Cheratina, formulato per il lavaggio dei capelli trattati. Indispensabile per proteggere i capelli.</li>
-                                <li><strong>Keratin Conditioner 400ml:</strong> Con nutrienti specifici, oli e proteine. Nutre i capelli e li protegge dal calore e agenti atmosferici.</li>
-                                <li><strong>Vanilla Deep Ristrutturante 207ml:</strong> Crema rivitalizzante per lunghezze e punte. Altamente ristrutturante, dona brillantezza unica.</li>
-                            </ul>
                         </div>
                     </div>
 
