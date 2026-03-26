@@ -602,74 +602,7 @@ const BrandsSection = () => {
 
 // --- Pages ---
 
-const KeratinSection = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(".keratin-text", {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-            gsap.from(".keratin-img", {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-                x: -50,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power3.out"
-            });
-        }, sectionRef);
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <section ref={sectionRef} className="py-32 bg-white overflow-hidden">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col lg:flex-row-reverse gap-16 items-center">
-                    <div className="lg:w-1/2 keratin-text">
-                        <span className="text-gold font-sans tracking-[0.2em] uppercase mb-4 block text-sm">Innovazione & Cura</span>
-                        <h2 className="section-title mb-8">Trattamenti alla Keratina</h2>
-                        <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-6 italic">Per capelli sani, forti e luminosi</h3>
-                        <div className="space-y-6 text-charcoal/80 font-sans leading-relaxed text-lg mb-10">
-                            <p>
-                                Il nostro speciale trattamento alla keratina ricostruisce la fibra capillare dall'interno, restituendo corpo e lucentezza anche ai capelli più indisciplinati o crespi. 
-                            </p>
-                            <p>
-                                Un rituale di rigenerazione che unisce la tecnica a prodotti di altissima qualità, per garantirti un liscio perfetto, naturale e un capello protetto nel tempo.
-                            </p>
-                        </div>
-                        <a 
-                            href={keratinaPdf} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="btn-primary inline-flex items-center gap-2"
-                        >
-                            SCOPRI DI PIÙ
-                        </a>
-                    </div>
-                    <div className="lg:w-1/2 w-full aspect-[4/5] object-contain md:h-[600px] rounded-[2rem] overflow-hidden keratin-img relative shadow-2xl">
-                        <img 
-                            loading="lazy"
-                            src={keratinaImg} 
-                            alt="Trattamento alla Keratina" 
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-charcoal/10 mix-blend-multiply"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
+// KeratinSection removed and merged into ConsigliPage
 
 const HomePage = () => {
     const mainRef = useRef(null);
@@ -700,7 +633,6 @@ const HomePage = () => {
             
             <ChiSiamoSection />
             <Philosophy />
-            <KeratinSection />
             <section className="py-24 bg-cream reveal-up">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="section-title mb-8">Quarant'anni di Stile</h2>
@@ -1797,11 +1729,24 @@ const ConsigliPage = () => {
                             <img src={consigliHair} alt="Riposizione Kapillare" className="w-full h-[500px] object-cover" />
                         </div>
                         <div className="w-full md:w-1/2 space-y-6">
-                            <h2 className="font-serif text-4xl text-charcoal">Trattamento di Ricostruzione Kapillare</h2>
+                            <h2 className="font-serif text-4xl text-charcoal">Trattamento di Ricostruzione Kapillare <br />e Keratina</h2>
                             <p className="font-sans text-lg text-charcoal/70 leading-relaxed">
                                 Il trattamento di Ricostruzione Capillare, a base di cheratina, è un trattamento innovativo per la Cura e la Bellezza dei Capelli. Non solo lascia i capelli Setosi, Lucidi e Dritti, ma offre anche sollievo dalla ingestibilità dei capelli crespi.
                             </p>
-                            <h3 className="font-serif text-2xl text-gold mt-6">I Prodotti per la cura domiciliare</h3>
+                            <p className="font-sans text-lg text-charcoal/70 leading-relaxed">
+                                Questo speciale rituale di rigenerazione ricostruisce la fibra capillare dall'interno, unendo la tecnica a prodotti di altissima qualità per garantirti un liscio perfetto, naturale e un capello protetto nel tempo.
+                            </p>
+                            
+                            <a 
+                                href={keratinaPdf} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="btn-primary inline-flex items-center gap-2 mt-4"
+                            >
+                                SCOPRI DI PIÙ
+                            </a>
+
+                            <h3 className="font-serif text-2xl text-gold mt-10">I Prodotti per la cura domiciliare</h3>
                             <ul className="space-y-4 font-sans text-charcoal/80">
                                 <li><strong>Keratin Shampoo 400ml:</strong> A base di Cheratina, formulato per il lavaggio dei capelli trattati. Indispensabile per proteggere i capelli.</li>
                                 <li><strong>Keratin Conditioner 400ml:</strong> Con nutrienti specifici, oli e proteine. Nutre i capelli e li protegge dal calore e agenti atmosferici.</li>
@@ -1813,7 +1758,7 @@ const ConsigliPage = () => {
                     {/* Blond Me */}
                     <div className="flex flex-col md:flex-row-reverse gap-12 items-center consigli-anim">
                         <div className="w-full md:w-1/2 rounded-[2rem] overflow-hidden shadow-2xl">
-                            <img src={consigliBlond} alt="Le Bionde" className="w-full h-[500px] object-cover" />
+                            <img src={keratinaImg} alt="Le Bionde" className="w-full h-[500px] object-cover" />
                         </div>
                         <div className="w-full md:w-1/2 space-y-6">
                             <h2 className="font-serif text-4xl text-charcoal">Le Bionde - Blondme</h2>
